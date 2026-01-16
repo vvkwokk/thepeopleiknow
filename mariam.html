@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Maria Medrano - The People I Know</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 1100px; 
+            right: 6%; 
+            transform: rotate(12deg); 
+        }
+
+        #sticker2 { 
+            top: 3200px; 
+            left: 4%; 
+            transform: rotate(-3deg); 
+        }
+
+        #sticker3 { 
+            top: 4100px; 
+            right: 6%; 
+            transform: rotate(6deg); 
+        }
+
+        #sticker4 { 
+            top: 5600px; 
+            left: 4%; 
+            transform: rotate(-6deg); 
+        }
+
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/MMnote1.jpg" alt="Sticker 1">
+                <p class="sticker-caption">Maria as a child</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/MMnote2.jpeg" alt="Sticker 2">
+                <p class="sticker-caption">Sewing patterns of Maria's final year collection</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/MMnote3.jpeg" alt="Sticker 3">
+                <p class="sticker-caption">Maria's fashion editorial project</p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/MMnote4.jpeg" alt="Sticker 4">
+                <p class="sticker-caption">Maria's fashion design sketches</p>
+            </div>
+
+            <main class="profile-main">
+
+                <!-- Profile Name -->
+                <h1 class="profile-name">Maria Medrano</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">Jewelry Vendor @ Cashfana Jewelry</span>
+                    <span class="tag-pill">Vendor</span>
+                    <span class="tag-pill">Fashion</span>
+                    <span class="tag-pill">Design</span>
+                </div>
+
+                <!-- Meta Row -->
+                <div class="meta-row">
+                    <span class="meta-date">NOV 26, 2025 5:26 PM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/MMIntro.jpeg" alt="Maria Medrano Jewelry Consultant @ Casana" style="width: 400px; height: 500px; object-fit: cover;">
+                    </div>
+
+                    <!-- Bio Text -->
+                    <p class="profile-bio">
+                        I’m Maria. I’m a Spanish girl, and I studied Fashion Design at the University of Madrid. When I finished my degree, I decided to do a master’s in Marketing Communication of Fashion. Right now, I am in New York working for a jewelry brand called <a href="https://cashfana.com/en?srsltid=AfmBOorsZW0mAwcBW7Xs5rJzSRhPEuiX1P3oNtA8SICROeWbajylHadg" target="_blank"> <u>Cashfana</u></a> as a vendor in the Christmas Market of Union Square.
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom">THREADS OF A NEW PLAN</div>
+                    <div class="body-1">
+                     <p>My mom always told me that when I was a child, I would wear one outfit in the morning and by the afternoon, I had already changed my outfit. I always made clothes for my dolls with my grandmother, so I think I have always had that vocation for fashion. <br><br>
+                    When I started to study design, I was so excited because it's a very creative and cool world. Two or three years into the degree, I started to have doubts if fashion design was truly what I liked. In university, we had to design and make the clothes. It’s not only the drafts, the moodboards, and the fun creative parts; it’s also countless amounts of sewing and all those nights without sleep. <br><br>
+                    So now, I am finding myself. I’ve become conscious that maybe my vocation is not strictly fashion design, and that's why I chose to pursue Marketing Communications within the fashion world. <br><br>
+
+                    <div class="intro-image-container">
+                        <img src="images/MM1.jpeg" alt="Garment designed and sewn by Maria" style="width: 600px; height: 350px; object-fit: cover;">
+                        <p class="image-caption">Garment designed and sewn by Maria</p>
+                        </div>
+
+                    The expectations in the degree are very high. People sometimes think it's only about drawing clothes or making drafts, but there is a creative idea inside of each collection or outfit. I didn't exactly change my mind about pursuing fashion design, but rather I discovered a whole new world within it.
+                    </p>   
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom">MADRID TO MANHATTAN</div>
+                    <div class="body-2">
+                    <p>In the fashion world, there are a lot of different jobs. For example, I wasn’t a vendor before, so I thought being a vendor was easy. I thought you only had to say, “Hi, this is my stand,” and then people buy some things. <br><br>
+                        Now, I really appreciate the vendor's work because it is so hard to sell something. You have to know the product very well, you have to investigate the brand, and you have to make sure you are saying the right things to the customer.  <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/MM5.jpg" alt="Cashfana Jewelry @ USQ Christmas Market" style="width: 550px; height: 500px; object-fit: cover;">
+                        <p class="image-caption">Cashfana Jewelry @ USQ Christmas Market</p>
+                        </div>
+
+                    It is a very difficult job. I don't know if vendors and customers in all countries are the same, but in New York, people usually say, “Okay, I will come back later,” and then they don’t come back. In Spain, we call it “quedada” - it means they say exactly what you wanted to hear, but they never actually return. <br><br>
+                    Fashion design in Spain is not as common as it is here in New York. I think in New York, they are more creative. In Spain, they focus more on the practice - how to sew, how to draw, and how to work with textiles. Here, they are more focused on the creative part, on investigating and knowing the history of a style or a specific designer. <br><br>
+
+                    <div class="intro-image-container">
+                        <img src="images/MM2.jpeg" alt="Maria's final year collection" style="width: 550px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Maria's final year collection</p>
+                        </div>
+
+                     I think learning the techniques is important, but I think in fashion design, the creativity is more important than the practice. We have people who study how to produce clothes or textile production, but now more and more companies are focused on the creative part of fashion design.
+                    </p>
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom">INFLUENCE OF REALITY</div>
+                    <div class="body-3">
+                    <p>
+                        I’m not sure about what is going to happen in the future, but if I have to choose my path for these next few years, I hope to learn more about the fashion industry in marketing and communications. Maybe in the future I would create a new brand and agency for brand marketing. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/MM3.jpeg" alt="Fashion Editorial styled by Maria" style="width: 550px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Fashion Editorial styled by Maria</p>
+                        </div>
+
+                        But nowadays, people wear fashion more because of the brand than what the fashion actually means for them. People are more focused on the physical side and not the meaning of the collection or investigating the designer. They are not conscious about why they are buying those things or why they are buying that specific brand.
+                    </p>
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="h4-custom">PAST SELF & FUTURE SELF</div>
+                    <div class="body-4">
+                        <p>
+                        It's a very competitive world in the fashion industry. You have to be mentally strong, smart, and nice - it can open a lot of doors for you. Meet people. Don’t close your mind to meeting people who are different from you or who have different styles or views on life. You have to be mentally tough and surround yourself with people who support you. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/MM4.jpeg" alt="Rings designed and hand-made by Maria" style="width: 700px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Rings designed and hand-made by Maria on her grandmother</p>
+                        </div>
+
+                        If I have to give advice, I would say: mix. You have to mix everything. Try things, because you are going to change. We are growing up, and maybe the things that we wear today, we will not wear tomorrow. Don’t think about what people are going to say about you — not only in fashion or style, but in all aspects of your life. <br><br>
+                        Instead of worrying about what others think, ask: "What do you want your future self to think of who you were?"
+                    </p>
+                    </div>
+
+                     <!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>5</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> MARIA MEDRANO<br>
+                    <strong>DATE:</strong> NOV 26, 2025
+                    <br><br>
+                    I met Maria when I was wandering around the USQ Christmas Market. I was immediately drawn to the chunky whimsical jewelry full of fruit charms. Maria was so kind 
+                    in explaining the designs and background of the brand. <br><br>
+                    After getting to know her for a bit, I ended up going back the next day to ask if she wanted to be a part of this project. <br><br> She was so 
+                    supportive and down to be apart of TPIK. I'm glad I had the courage to ask.
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>MM112625</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    
+                    <div class="social-section">
+                    <div class="h1-custom" style="margin-top: 0;">MORE OF MARIA HERE!</div>
+                    <div class="social-icons-row">
+                         <!-- Instagram -->
+            <a href="https://www.instagram.com/maariamedrano/" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/mar%C3%ADa-medrano-guti%C3%A9rrez-800147221/" target="_blank" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:mamedrano01@gmail.com" class="social-link">
+                <i class="far fa-envelope"></i>
+                <span>Email</span>
+            </a>
+                    </div>
+            </main>
+        </div>
+    </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+    <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+    
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div> </section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+        <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

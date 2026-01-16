@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                // Set CSS variables
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            // 5. Re-enable transitions once page is ready
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Vianna Kwok - The People I Know</title>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <!-- Navigation Header -->
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+         <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 1100px; 
+            right: 5%; 
+            transform: rotate(8deg); 
+        }
+
+        #sticker2 { 
+            top: 2150px; 
+            left: 2%; 
+            transform: rotate(-6deg); 
+        }
+
+        #sticker3 { 
+            top: 3190px; 
+            right: 3%; 
+            transform: rotate(4deg); 
+        }
+
+        #sticker4 { 
+            top: 4200px; 
+            left: 2%; 
+            transform: rotate(-6deg); 
+        }
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/VKnote1.jpg" alt="Sticker 1">
+                <p class="sticker-caption">Learning how to code</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/VKnote2.jpg" alt="Sticker 2">
+                <p class="sticker-caption">Enjoying free food with Kaya @ Vega creative co-working club</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/VKnote3.jpg" alt="Sticker 3">
+                <p class="sticker-caption">Talia Cotton's talk @ SVA</p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/VKnote4.jpg" alt="Sticker 4">
+                <p class="sticker-caption">Working on TPIK @ Jaslyn's house</p>
+            </div>
+    
+            <main class="profile-main">
+
+                <!-- Name Title -->
+                <h1 class="profile-name">Vianna Kwok</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">Creator of TPIK</span>
+                    <span class="tag-pill">Design</span>
+                    <span class="tag-pill">Tech</span>
+                </div>
+
+                <!-- Date and Share Row -->
+                <div class="meta-row">
+                    <span class="meta-date">DEC 3, 2025 10:04 PM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/ViannakIntro.JPG" alt="Vianna Kwok Creator of TPIK" style="width: 400px; height: 500px; object-fit: cover;">
+                    </div>
+
+                    <p class="profile-bio">
+                        Jumpscare! It's me. Hi I'm Vianna, the creator of The People I Know [TPIK]. To whoever’s reading this, thank
+                        you for tinkering
+                        around and exploring this site long enough to feed Wailmer. I wanted to use this space
+                        as a way to expand my thoughts and process of designing and developing this website.
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom" id="code">GIRL MEETS CODE</div>
+                    <div class="body-1">
+                        I have never yearned, desired, or wanted something more in this universe than to learn how to
+                        code.
+                        It was like speaking a secret language but instead of talking to humans, I could talk to a
+                        computer. <br><br>
+
+                        In 2023, I wanted to code my own portfolio website. I overestimated myself, confidently
+                        installed VS code, realized how
+                        steep the learning curve was, gave up and immediately uninstalled it. Since then, I have tried
+                        many many times
+                        and have given up thrice that amount. It was so frustrating. If the Lorax could speak for the
+                        trees - why couldn't I speak for those damn computers? <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/VK1.jpg" alt="Me with Vvzela Kook's piece: Confidential Records: Code is King" style="width: 400px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Me @ Tai Kwun. Art by Vvzela Kook.</p>
+                        </div>
+
+                        After my exams ended in May 2025, I started to put my foot on the pedal and aimed to achieve
+                        this seeminly unattainable goal of mine.
+                        No more giving up. Thus my <a href="https://vvkwokk.github.io/idk-what-im-doing/"
+                            target="_blank"> <u>first website</u></a> came to be. You can see how that went. [Laughs] I
+                        never moved past HTML.
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom" id="oops">OOPS I DID IT AGAIN</div>
+                    <div class="body-2">
+                        To understand more about this project, I have to take you back to how it all started. On the
+                        fateful day of November 2, 2025, Kaya invited
+                        me to a creative co-working event hosted by a startup called <a href="https://www.joinvega.com/" target="_blank"><u>Vega</u></a>. I admired the way she
+                        connected with people in
+                        such a natural way. <br><br>
+                        
+                        I consider myself as an enclosed person. I don't usually ask many
+                        questions because I don't
+                        want to be perceived as nosy – but I realized there's a difference between nosiness and genuine curiosity.
+                        My only thought that evening was “Wow, I want to learn from her.” I asked: “Hey can I interview
+                        you?”
+                        and she's like “Okay!” [Laughs]<br><br>
+
+                        That's when the idea of collecting these conversations with people in the creative and tech
+                        fields whom I want to learn from came to be. This time I didn't give up. I couldn't.
+                        Compared to my previous goal of making my portfolio website, this website wasn't just for me. It
+                        literally involved the people I know, which motivated me to push through and finish. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/VK2.jpg" alt="Working on TPIK w Kaya @ cafe" style="width: 400px; height: 350px; object-fit: cover;">
+                        <p class="image-caption">Working on TPIK w Kaya @ cafe</p>
+                        </div>
+
+                        How embarrasing would it be to reach out of nowhere and say "Hey! Love your work! Can I
+                        interview you for this website I'm gonna publish?" - then telling them couple weeks later that
+                        it's not gonna be a thing
+                        because you gave up. Awkward. I'd probably bury myself in a hole and never forgive myself.
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom" id="me">ME AS A URL</div>
+                    <div class="body-3">
+                        I wanted to embed my personality into this website as much as possible whilst centering the voices of
+                        those I featured. Keeping the design
+                        simple, I wanted to create a balance between my creative liberties while making sure that it doesn't take away from the knowledge
+                        and gold I've sifted out through these conversations. <br><br>
+
+                        Inspired by <a href="https://www.zero.nyc/" target="_blank"> <u>Zero Studio's</u></a> emoji bar and <a href="https://www.instagram.com/taliasaccount/" target="_blank"><u>Talia Cotton's</u></a> "design that resonates"
+                        philosophy, I curated a story through these emojis: <br><br>
+
+                        🚪: opening doors to meet new people or create new connections. <br><br>
+
+                        🍵: similar to a coffee chat, but instead of its transactional associations, my self-coined term
+                        of “tea chat”
+                        is more genuine and personal. <br><br>
+
+                        💡: there's always that single spark, subconscious or unconscious, when you talk to someone for
+                        the first time and
+                        you just have that gut feeling that you vibe with them. Also I just wanted a dark theme for
+                        variety. <br><br>
+
+                        🌷: a very friendly flower. <br><br>
+
+                        🦐: a non-negotiable. There's a saying that you're a reflection of people that you're friends
+                        with. Even though I'm
+                        not in touch with everyone here 24/7, the connections I have are also a reflection of me. In
+                        that sense, I wanted this website to be a reflection of me: silly, whimsical, and a bit
+                        unexpected.<br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/TPIKILLUST.png" alt="TPIK Illustration" style="width: 700px; height: 250px; object-fit: cover;">
+                        <p class="image-caption">TPIK Illustration</p>
+                        </div>
+
+                        Picture this: you knock on the 🚪; I open it and you're greeted with a hot cup of 🍵; we talk
+                        and connect and experience 💡; there’s fresh 🌷 on the table; lastly I turn into <a href="https://www.pokemon.com/us/pokedex/wailmer" target="_blank"> <u>Wailmer</u></a> and you
+                        find out that the tea I gave you has a magical
+                        potion that turns you into a 🦐 and I eat you.
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="h4-custom" id="worth">WHAT MADE IT WORTH IT</div>
+                    <div class="body-4">
+                        My favorite part about building this was seeing how it all came together in the end. I’m very
+                        happy with how I've been able to document my friends’ journeys. I didn't add anything, only
+                        deleted or
+                        rearranged text to keep their voices intact to the of smallest details, like putting brackets
+                        when they laugh so you can have an idea of their personality. There's something so special about
+                        making sure their voices are alive in their purest form within text. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/VK3.jpg" alt="Iterations of TPIK website design" style="width: 600px; height: 500px; object-fit: cover;">
+                        <p class="image-caption">Iterations of TPIK website design</p>
+                        </div>
+
+                        Everyone here has a trait, achievement, experience, or perspective in the world that I admire and wanted to
+                        dive deeper in. I hope TPIK impacted you in some way or introduced you to something
+                        new as much as it did for me. Though I still have no idea what I’m doing, I wanted my first
+                        coding project to be something I’m proud of showing. <br><br>
+
+                        Well, maybe I'll look back in a few years and think, “Wow, this is shit.”
+                    </div>
+
+                    <!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>8</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> VIANNA KWOK<br>
+                    <strong>DATE:</strong> DEC 3, 2025
+                    <br><br>
+                    ... to Clement Sen for supporting me through this crashout-inducing project and
+                                        encouraging me to finish TPIK even when I felt like giving up [again], thank
+                                        you... to Kaya Sasaki for inspiring this project, I'm glad
+                                        I met you and can't wait to see what cool stuff you put out there... to Hank Qiu
+                                        for answering my bombardment of coding questions in vivid detail, 
+                                        this won't be the last time...  <br><br> to Everyone featured here, thank you for
+                                        taking the time out of your busy lives to be here... 
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>VK120325</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    
+                     <!-- Social Links Section -->
+                    <div class="profile-divider"></div>
+
+                    <div class="social-section">
+                        <div class="h1-custom" style="margin-top: 0;">MORE OF ME HERE!</div>
+                        <div class="social-icons-row">
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/vvkwokk/" target="_blank" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+
+                            <!-- Website -->
+                            <a href="https://viannakwok.myportfolio.com/work" target="_blank" class="social-link">
+                                <i class="fas fa-globe"></i>
+                                <span>Website</span>
+                            </a>
+
+                            <!-- LinkedIn -->
+                            <a href="https://www.linkedin.com/in/vianna-kwok/" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                                <span>LinkedIn</span>
+                            </a>
+
+                            <!-- Email -->
+                            <a href="mailto:vvkwokk@gmail.com" class="social-link">
+                                <i class="far fa-envelope"></i>
+                                <span>Email</span>
+                            </a>
+                        </div>
+                    </div>
+            </main>
+        </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+    <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+</section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+        <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY MENU -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <!-- Main JS -->
+    <script src="script.js"></script>
+</body>
+</html>

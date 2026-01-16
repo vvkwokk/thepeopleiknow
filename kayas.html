@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Kaya Sasaki - The People I Know</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 1400px; 
+            right: 5%; 
+            transform: rotate(8deg); 
+        }
+
+        #sticker2 { 
+            top: 4000px; 
+            left: 2%; 
+            transform: rotate(-6deg); 
+        }
+
+        #sticker3 { 
+            top: 4380px; 
+            right: 3%; 
+            transform: rotate(4deg); 
+        }
+
+        #sticker4 { 
+            top: 5500px; 
+            left: 3%; 
+            transform: rotate(-13deg); 
+        }
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/KSnote1.jpeg" alt="Sticker 1">
+                <p class="sticker-caption">Kaya and friends @ community event</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/KSnote2.jpg" alt="Sticker 2">
+                <p class="sticker-caption">Coffeehouse/Marketplace event led by Kaya</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/KSnote3.jpg" alt="Sticker 3">
+                <p class="sticker-caption">Kaya's illustration of the places that are special to her</p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/KSnote4.jpg" alt="Sticker 4">
+                <p class="sticker-caption">Kaya & I @ v?'s girlhood exhibition</p>
+            </div>
+
+            <main class="profile-main">
+
+                <!-- Profile Name -->
+                <h1 class="profile-name">Kaya Sasaki</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">Operations @ Phia</span>
+                    <span class="tag-pill">Suitemate</span>
+                    <span class="tag-pill">Fashion</span>
+                    <span class="tag-pill">Tech</span>
+                </div>
+
+                <!-- Meta Row -->
+                <div class="meta-row">
+                    <span class="meta-date">NOV 2, 2025 10:04 PM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/KayasIntro.JPG" alt="Kaya Sasaki Operations @ Phia" style="width: 400px; height: 500px; object-fit: cover;">
+                    </div>
+
+                    <!-- Bio Text -->
+                    <p class="profile-bio">
+                        Hi my name is Kaya Noe Sasaki. I’m Japanese American and I've lived in New York most of my life,
+                        but I was born in California. I really love to sing, dance, and learn new things. I study
+                        Strategic Design and Management at Parsons and work at a fashion tech startup called <a href="https://phia.com/" target="_blank"> <u>Phia</u></a>.
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom" id="rejection">REJECTION IS REDIRECTION</div>
+                    <div class="body-1">
+                        When I was a sophomore in high school, I had an existential crisis. I felt like I was living for
+                        no purpose — not in a suicidal
+                        way, but in a fulfillment type of way. I would come home and cry for hours even though nothing
+                        was “wrong”, I just wanted to
+                        do something with myself. <br><br>
+
+                        That's when I started thinking about what purpose means. I realized that our careers are such a
+                        big part of our lives, and so
+                        many people spend theirs feeling unfulfilled. I was introduced to the creative side of tech a
+                        year ago during college app season.
+                        I was dead set on being a finance bro doing investment banking. No hate, but it's boring. I
+                        thought I was destined for that path
+                        because I liked operations and business. That's why I applied to NYU for business and economics.
+                        When my ED got rejected, it was
+                        a big reality check: <br><br>
+
+                        There wasn't a reason why I wanted to go down that path. It was just a path that everyone seemed
+                        to be on. <br><br>
+
+                        After thinking about what I've enjoyed in life, my hobbies, and what I want to pursue
+                        professionally, I realized that there's a
+                        space that exists between the arts and tech. I like operations and doing the back management of
+                        projects. I like knowing that these
+                        projects impact people's lives. This path was for me and I fully dived into it.
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom" id="toe">GET YOUR TOE IN THE DOOR</div>
+                    <div class="body-2">
+                        If it was any later, I wouldn't have been in Phia. The reason why it all worked out was just
+                        perfect timing. When I emailed [Phia],
+                        they weren't out in the world yet. I was aware of them because there was a little bit of hype. A
+                        year later, when I was thinking about
+                        where I'd want to cold email, their name popped up again and I thought: “Why don't I just email
+                        them?” <br><br>
+
+                        I sent the email at 12 AM so it'd land at the top of their inbox in the morning. <a href="https://www.instagram.com/phoebegates/" target="_blank"> <u>Phoebe</u></a> responded at 8:56 AM. We
+                        hopped on a call the week after, I went in person a month later, and have been part-time since
+                        April. <br><br>
+
+                        I just laid myself out. This is me. I'm looking for blank, and I can provide blank. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/KS1.JPG" alt="Kaya Sasaki in Phia"
+                            style="width: 400px; height: 500px; object-fit: cover;">
+                            <p class="image-caption">Kaya @ Phia</p>
+                        </div>
+
+                        You'd be surprised at the amount of people that don't even include their resume. When I managed
+                        Phia's recruitment inbox, I saw people
+                        who just wrote two lines: “We'd love an internship and would love to connect. Excited to hear
+                        back!” They don't even explain why. Those
+                        emails don't stand out. The ones that do are from people who literally lay themselves out — show
+                        who they are and what they can do. <br><br>
+
+                        If you want something, it's not that hard to get it — you just have to put yourself out there.
+                        Get your foot in the door. You can literally
+                        have a toe in the door, that's enough.
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom" id="networking">NETWORKING AT EVENTS</div>
+                    <div class="body-3">
+                        There's value in everyone you talk to - it's up to you to determine what that value means. In
+                        events, you'll meet people who are cracked at
+                        whatever they're doing. Then you'll see people that are just there to get the food. I went to an
+                        event the other night and they were like, “What
+                        the fuck is this event? I just came here for the salami.” [Laughs] <br><br>
+
+                        It's not just about seeking valuable people, but also displaying how you can be valuable to
+                        them. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/KS2.jpg" alt="Kaya Sasaki Operations @ Phia" style="width: 400px; height: 500px; object-fit: cover;">
+                        <p class="image-caption">Kaya as a panel speaker for Act To Change</p>
+                    </div>
+
+                        You can tell when people are not interested in what you're talking about — it's human. But
+                        there's always something worth acknowledging and
+                        respecting. Maybe you haven't talked to them enough to realize what's interesting. The questions
+                        will come naturally if you're genuinely curious
+                        about what people are talking about. <br><br>
+
+                        During an event, I keep track of everyone I've talked to and make sure that I get their contact
+                        info. If it's a Gen Z event, I ask for Instagram. If
+                        it's corporate people in their late 20s, I ask for their email. I have this assumption that if
+                        I'm a freshman in college asking some 28-year-old for
+                        their LinkedIn, it sounds desperate - you know what I mean? <br><br>
+
+                        After the event, I go down the list, thank everyone, and reference what we talked about in the
+                        conversation to let people know I was paying attention. Whatever it might be just to
+                        make your impression a bit more impactful. Everyone's super,
+                        super, super connected. The world is so small, you can use those mutuals as a springboard for
+                        connecting with other people.
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="h4-custom" id="sentence">THE SENTENCE THAT CHANGED MY LIFE</div>
+                    <div class="body-4">
+                        The thing that's changed my life is realizing my purpose, which sounds really cliche, but
+                        it's true. I'm in Phia. I make <a href="https://www.youtube.com/@kayanoesasaki" target="_blank"> <u>Youtube</u></a> videos for fun. I
+                        have all these hobbies and interests. I seek all these opportunities. Yes, it's nice for the
+                        resumeés, but what is it all for? <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/KS3.jpg" alt="Kaya's Youtube Channel" style="width: 700px; height: 350px; object-fit: cover;">
+                        <p class="image-caption">Kaya's Youtube Channel</p>
+                    </div>
+
+                        I sat down for an hour and crafted this single sentence about my trajectory in life. It's
+                        transformed the way I think. I'm the type of person who likes
+                        a sense of direction and purpose in life. Now I feel so secure and so confident in what I'm
+                        destined to do. <br><br>
+
+                        "My ultimate life goal at the moment is to work towards finding ways to blend strategy and
+                        creativity to build spaces that empower diverse voices, spark new
+                        ideas, and inspire community and connection." <br><br>
+
+                        It sounds really wordy, but it feels right to me. That's all that matters. I truly recommend
+                        doing this for anyone. Knowing your values is important,
+                        socially, professionally - every aspect of life. It's like a life compass for me. It seems
+                        small, but the impact is large.
+                    </div>
+
+                    <!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>1</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> KAYA SASAKI<br>
+                    <strong>DATE:</strong> NOV 2, 2025
+                    <br><br>
+                    Kaya and I became suitemates after I reached out to her on Instagram. She's the most hardworking, definition of "hustle" person I know. <br><br>
+                    I've noticed a pattern where whenever I move somewhere new, typically the first person I meet has the greatest impact on me. <br><br> Within the 5 months I've known you, 
+                    you've introduced me to so many new thought processes, habits, and experiences; Thank you.
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>KS110225</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    
+                    <div class="social-section">
+                    <div class="h1-custom" style="margin-top: 0;">MORE OF KAYA HERE!</div>
+                    <div class="social-icons-row">
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/kayanoesasaki/" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+
+                        <!-- Website -->
+                        <a href="https://kayanoesasaki.framer.website/" target="_blank" class="social-link">
+                            <i class="fas fa-globe"></i>
+                            <span>Website</span>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/kayansasaki/" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+
+                        <!-- Youtube -->
+                        <a href="https://www.youtube.com/@kayanoesasaki" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>Youtube</span>
+                        </a>
+
+                        <!-- Email -->
+                        <a href="mailto:hello.kayanoesasaki@gmail.com" class="social-link">
+                            <i class="far fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                    </div>
+            </main>
+        </div>
+    </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+    <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div> </section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+        <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

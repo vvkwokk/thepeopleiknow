@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                // Set CSS variables
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            // 5. Re-enable transitions once page is ready
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>The People I Know</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+    <!-- =========================================
+         2. MAIN WEBSITE CONTENT
+         ========================================= -->
+    <div class="hero-wrapper">
+
+        <!-- Navigation Header -->
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+
+            <div class="nav-center" id="dynamicNavTitle">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <h1 class="hero-title">The People I Know</h1>
+        <div class="tpik-container"> 
+        <img src="images/TPIKILLUST.png" 
+             alt="TPIK Illustration" 
+             style="width:100%; height:100%; object-fit: cover;">
+    </div>
+            <p class="hero-subtitle">
+                We often cross paths with people without realizing how much we can learn from them. This site is an
+                archive of dialogues with the people I know in the creative and tech industries whom I want to learn
+                more from.
+            </p>
+        </main>
+
+        <div class="dotted-divider profile-divider"></div>
+        
+        <!-- FILTER BAR SECTION -->
+        <div class="filter-wrapper">
+            <div class="filter-content">
+                <div class="filter-group-left" style="position: relative;">
+                    <button id="filterBtn" class="filter-pill">FILTER</button>
+                    <!-- POPUP -->
+                    <div class="filter-popup" id="filterPopup">
+                        <div class="popup-header">CATEGORIES</div>
+                        <div class="checkbox-grid">
+                            <label class="custom-checkbox"><input type="checkbox" value="architecture"><span class="checkmark"></span>Architecture</label>
+                            <label class="custom-checkbox"><input type="checkbox" value="design"><span class="checkmark"></span>Design</label>
+                            <label class="custom-checkbox"><input type="checkbox" value="fashion"><span class="checkmark"></span>Fashion</label>
+                            <label class="custom-checkbox"><input type="checkbox" value="fine art"><span class="checkmark"></span>Fine Art</label>
+                            <label class="custom-checkbox"><input type="checkbox" value="illustration"><span class="checkmark"></span>Illustration</label>
+                            <label class="custom-checkbox"><input type="checkbox" value="photography"><span class="checkmark"></span>Photography</label>
+                            <label class="custom-checkbox"><input type="checkbox" value="tech"><span class="checkmark"></span>Tech</label>
+                        </div>
+                        <div class="popup-footer">
+                            <button id="clearFiltersBtn">CLEAR ALL</button>
+                        </div>
+                    </div>
+                    <span class="filter-text-label">OR</span>
+                    <button id="viewGridBtn" class="filter-pill">VIEW IN: GRID</button>
+                </div>
+
+                <div class="filter-group-right">
+                    <button id="newestBtn" class="filter-pill">NEWEST</button>
+                    <button id="shuffleBtn" class="filter-pill">SHUFFLE</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div>
+</div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <p>© Vianna Kwok</p>
+        </footer>
+    </div> 
+
+    <!-- Mobile Menu Stuff -->
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+    <div id="mobileOverlay" class="mobile-overlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+
+</body> 
+</html>

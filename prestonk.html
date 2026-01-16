@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                // Set CSS variables
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            // 5. Re-enable transitions once page is ready
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Preston Kwok - The People I Know</title>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <!-- Navigation Header -->
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 1100px; 
+            right: 5%; 
+            transform: rotate(8deg); 
+        }
+
+        #sticker2 { 
+            top: 1400px; 
+            left: 3%; 
+            transform: rotate(-4deg); 
+        }
+
+        #sticker3 { 
+            top: 3460px; 
+            right: 5%; 
+            transform: rotate(10deg); 
+        }
+
+        #sticker4 { 
+            top: 3900px; 
+            left: 5%; 
+            transform: rotate(-7deg); 
+        }
+
+        #sticker5 { 
+            top: 5400px; 
+            right: 2%; 
+            transform: rotate(3deg); 
+        }
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/PKnote1.jpg" alt="Sticker 1">
+                <p class="sticker-caption">Preston @ Legoland Florida</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/PKnote2.jpg" alt="Sticker 2">
+                <p class="sticker-caption">Preston and "his boys" @ Studio</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/PKnote3.jpg" alt="Sticker 3">
+                <p class="sticker-caption">Preston's work @ Corgan on a Monday morning</p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/PKnote4.jpg" alt="Sticker 4">
+                <p class="sticker-caption">Preston @ Wells Fargo Corporate Campus</p>
+            </div>
+
+             <div id="sticker5" class="draggable-sticker">
+                <img src="images/PKnote5.jpg" alt="Sticker 4">
+                <p class="sticker-caption">Eating toothpaste icecream</p>
+            </div>
+
+            <main class="profile-main">
+
+                <!-- Name Title -->
+                <h1 class="profile-name">Preston Kwok</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">Project Specialist @ Corgan</span>
+                    <span class="tag-pill">Brother</span>
+                    <span class="tag-pill">Architecture</span>
+                    <span class="tag-pill">Design</span>
+                    <span class="tag-pill">Photography</span>
+                </div>
+
+                <!-- Date and Share Row -->
+                <div class="meta-row">
+                    <span class="meta-date">NOV 5, 2025 8:01 PM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/PrestonkIntro.JPG" alt="Preston Kwok" style="width: 600px; height: 400px; object-fit: cover;">
+                    </div>
+
+                    <!-- Bio Text -->
+                    <p class="profile-bio">
+                        I'm Preston and I’m trying to be an architect. 
+                        I studied architecture at Rensselaer Polytechnic Institute (RPI) in Troy, 
+                        New York and recently started at <a href="https://www.corgan.com/firm" target="_blank"> <u>Corgan</u></a> in 
+                        Dallas, Texas. I work in the commercial sector, designing offices, malls, 
+                        and public spaces. Honestly, I’m not even sure why I chose commercial — I just like it.
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom" id="built">BUILT DIFFERENT</div>
+                    <div class="body-1">
+                        Pretty much every kid, including me, played legos when they were younger. I didn't just 
+                        build it and leave it there. I would always build it, deconstruct it, and build it in a 
+                        new way. I took pictures of buildings without even knowing why. After taking this architecture 
+                        class in high school, that really hit the nail in the hammer — if that's a phrase. I 
+                        don't think I would know how to do anything else anyway. <br><br>
+
+                        I definitely miss school, miss studio culture. Having those 3 AM sessions at the studio with my 
+                        boys grinding out drawings, renderings, building models. I honestly did not have a single moment 
+                        where I wanted to drop out. I usually strive to be the best at everything, that mindset helped 
+                        motivate me to finish. I felt like I was too deep into this. Having to keep that mentality for 
+                        5 years was kind of a struggle, but that motivation helped me improve myself. I wanted people to 
+                        look up to me in terms of my designs, renderings, and all that stuff. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/PK1.JPG" alt="SpaceX's central spaceport along the Hudson River" style="width: 700px; height: 300px; object-fit: cover;">
+                        <p class="image-caption">SpaceX's Central Spaceport along the Hudson River. Design by Preston Kwok and Zonglin Li.</p>
+                        </div>
+
+                        I don't think my style can be categorized. My design reflects the experience of the person experiencing 
+                        it by repeating shapes and forms. It's not just smashing pieces into each other until it works, 
+                        but each form smoothly transitions between one place to another.
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom" id="design">YOUR DESIGN ISN'T YOUR OWN</div>
+                    <div class="body-2">
+                        People have told me that my design didn't work. I felt horrible cause I spent so much time on it. 
+                        There was an apartment housing studio project that we did and I thought it worked out. But I was 
+                        owning the project. I was too blindsided on all the problems that were made because I was just 
+                        focusing on if it looks good. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/PK2.jpg" alt="Apartment Housing Studio Project" style="width: 500px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Apartment Housing Studio Project. Design by Preston Kwok.</p>
+                        </div>
+
+                       We’ve been taught that you shouldn't get too attached to your projects. Your personality isn't 
+                       attached to the building, so don't feel bad when people say that your design is ugly. When I 
+                       realized that I started to take criticism as a growing experience rather than negativity. Those 
+                       criticisms can improve my design — not saying that all the crits I received were always right. I 
+                       would try to find a middle ground, juggling between what I think was right versus what they say was right. <br><br>
+
+                        Crits will affect you a good amount unless you realize to take it more as a learning experience than 
+                        they just hate on you. If the prof started bashing on you as a person… [Laughs] that’s a whole other 
+                        topic, but if they bash on your project just don't take it to heart. <br><br>
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom" id="servant">ARCHITECT OR SERVANT?</div>
+                    <div class="body-3">
+                        During my 2nd year, my internship at <a href="https://rlp.asia/en/" target="_blank"> <u>Ronald & Lu</u></a> was more of a learning experience than anything. I learned 
+                        that I prefer the US work culture a lot more than Asia. Hong Kong was a lot more intensive. It was 9 to 6, 
+                        and [Laughs] I assume people stayed longer than 6 over there. Here is more laid back, more collaborative. 
+                        At 5, everyone just dips, rarely anyone stays past 6. It's just how different cultures are. <br><br>
+
+                        I think Corgan is a good choice. I feel proud of it. The work culture isn't toxic, unlike [cough] <a href="https://www.kpf.com/" target="_blank"> <u>KPF</u></a>, 
+                        another super well-known firm based in New York that specializes in skyscrapers. They did the One World 
+                        Trade Center, and that observation deck — the super tall triangular building you can see from a mile away. 
+                        Based on my professors, they say that work experience there is super toxic and always has competition. I'm 
+                        glad that Corgan is not like that. <br><br>
+
+                        I mean I like my job at Corgan cause I get paid. But so far, I don't have that much creative intake in the 
+                        projects because I'm new. I'm not gonna say slave, but when I'm a [pauses] servant-architect, I just do 
+                        drawings and fix the red lines. But I honestly do not care as long as I have something to do. 
+                        As long as I can do my job I'm happy.
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="h4-custom" id="spaces">SEEING SPACES DIFFERENTLY</div>
+                    <div class="body-4">
+                        Photography is something that I recently started to enjoy. I talked to the in-house photographer in 
+                        Corgan and got invited to one of his shoots at the Wells Fargo headquarters that recently opened. Seeing 
+                        the process of starting from 5 AM in the morning and ending at sunset seems more interesting to me than just 
+                        sitting and drawing. They travel all around and then just retake shoots and shoots.<br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/PK3.jpg" alt="Grundtvig's Church in Copenhagen, Denmark" style="width: 700px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Grundtvig's Church in Copenhagen, Denmark. Photo by Preston Kwok.</p>
+                        </div>
+
+                        I think I'm best at showing the building's potential and how it is. At the end of the day, anyone could just 
+                        look at a building and think “Oh that's cool.” But I think architecture photography highlights the different 
+                        moments in the designer's process of thinking. Having those moments captured makes the building even more recognizable. <br><br>
+
+                       I want to be the next <a href="https://iwan.com/" target="_blank"> <u>Iwan Baan</u></a>, a world-famous architecture photographer that I recently started to look up to. All the 
+                       famous architecture firms would hire him to shoot their newest buildings and I want to do the same.
+                    </div>
+
+                    <!-- P5 -->
+                    <div class="h5-custom" id="AI">AI WON'T KILL THE ARCHITECT</div>
+                    <div class="body-5">
+                        There was another talk I listened to a couple weeks ago saying people were scared of AI taking over architecture. 
+                        The speaker, <a href="https://www.corgan.com/firm/leadership/dawn-chisholm-meinhardt" target="_blank"> <u>Dawn Meinhardt</u></a>, has been working for almost 40 years. When she was just starting, they had 
+                        pen and paper. Over a course of 10, 20 years they slowly started to learn basic computer drawing, and another 10 
+                        years they advanced to fully computer.<br><br>
+
+                        AI can make images look pretty and tell basic info of how a building works, but I don't think it has that human 
+                        design element. It imitates what the human would design, but it doesn't have its own mind yet. <br><br>
+
+                       Just because all these new technologies are emerging, it doesn't mean that's gonna take over. It means it can 
+                       help speed up the process for designers and architects. So far AI can't replace architects yet. I say “yet” because I'll probably die before then.
+                    </div>
+
+                    <!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>6</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> PRESTON KWOK<br>
+                    <strong>DATE:</strong> DEC 12, 2025
+                    <br><br>
+                    Preston - it's weird calling him Preston because I call him Gogo [哥哥] - has been there my whole life. 
+                    <br><br>
+                    That has been both a good thing and bad thing. For the longest time it's been the latter. Still is. 
+                    <br><br>
+                    I didn't really pay attention to architecture until he kept pointing out where the fire gates in malls were.
+                    It's nice knowing that I have a sibling in a design-adjacent industry. 
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>PK121225</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    
+                    <div class="social-section">
+                        <div class="h1-custom" style="margin-top: 0;">MORE OF PRESTON HERE!</div>
+                        <div class="social-icons-row">
+                            <a href="https://www.instagram.com/kwokitecture/" target="_blank" class="social-link">
+                                <i class="fab fa-instagram"></i><span>Instagram</span>
+                            </a>
+                            <a href="https://kwoke.myportfolio.com/work" target="_blank" class="social-link">
+                                <i class="fas fa-globe"></i><span>Website</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/kwoke/" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin-in"></i><span>LinkedIn</span>
+                            </a>
+                            <a href="mailto:info.prestonkwok@gmail.com" class="social-link">
+                                <i class="far fa-envelope"></i><span>Email</span>
+                            </a>
+                        </div>
+                    </div>
+            </main>
+        </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+     <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div> </section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+       <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY MENU -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <!-- Main JS -->
+    <script src="script.js"></script>
+</body>
+</html>

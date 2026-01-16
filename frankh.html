@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Frank Holliday - The People I Know</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 2100px; 
+            right: 5%; 
+            transform: rotate(8deg); 
+        }
+
+        #sticker2 { 
+            top: 3200px; 
+            left: 2%; 
+            transform: rotate(-6deg); 
+        }
+
+        #sticker3 { 
+            top: 3950px; 
+            right: 3%; 
+            transform: rotate(7deg); 
+        }
+
+        #sticker4 { 
+            top: 4900px; 
+            left: 3%; 
+            transform: rotate(-7deg); 
+        }
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/FHnote1.jpg" alt="Sticker 1">
+                <p class="sticker-caption">Frank preparing for his solo show @ <a href="https://www.museocarlobilotti.it/" target="_blank"> <u>Museum Carlo Bilotti</u></a>, Rome</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/FHnote2.jpg" alt="Sticker 2">
+                <p class="sticker-caption">Frank's Club 57 card</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/FHnote3.jpg" alt="Sticker 3">
+                <p class="sticker-caption">Club 57 calendar, July 1980. Design by Ann Magnuson. </p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/FHnote4.jpg" alt="Sticker 4">
+                <p class="sticker-caption">50 Years of New York with Frank Holliday</p>
+            </div>
+
+            <main class="profile-main">
+
+                <!-- Profile Name -->
+                <h1 class="profile-name">Frank Holliday</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">Artist</span>
+                    <span class="tag-pill">Time Professor</span>
+                    <span class="tag-pill">Fine Art</span>
+                </div>
+
+                <!-- Meta Row -->
+                <div class="meta-row">
+                    <span class="meta-date">DEC 5, 2025 5:32 PM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/FrankhIntro.jpg" alt="Frank Holliday Artist" style="width: 400px; height: 500px; object-fit: cover;">
+                    </div>
+
+                    <!-- Bio Text -->
+                    <p class="profile-bio">
+                         I’m Frank Holliday. I’m an artist and teacher at <a href="https://www.newschool.edu/parsons/" target="_blank"> <u>Parsons</u></a>. I’m an actor and I’m a writer. That’s who I am. I’m all the above.
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom" id="trip">THE TRIP THAT MADE AN ARTIST</div>
+                    <div class="body-1">
+                       I went to the <a href="https://www.moma.org/" target="_blank"><u>Museum of Modern Art</u></a> on LSD when I was 15 years old, and that’s when I decided I wanted to be an artist. 
+                       I went in there and really identified with what these people were doing because I felt like we spoke the same language. <br> <br>
+I learned at a very early age that I could get attention. My father would always beat my mother. She was always bruised. I found that I could make drawings and it would make her happy. It was a healing process. I would draw and say “Look, Mommy,” she was struggling and it just made her so happy. <br><br>
+
+<div class="intro-image-container">
+                        <img src="images/FH1.jpg" alt="Frank's collage of Sam"
+                            style="width: 500px; height: 400px; object-fit: cover;">
+                            <p class="image-caption">Frank's collage of Sam</p>
+                        </div>
+In second grade, I made a collage of my dog Sam and they sent it away and everybody got their things back but mine didn't come back. I was like, “You lost mine!” But it won an award. It made me go, "Oh, maybe there's something here." I was young and I got approval for something.
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom" id="well">FILLING THE WELL</div>
+                    <div class="body-2">
+                        It’s natural to feel burned out. What they call “filling the well” is when you're putting work out, you're emptying it out and that's when the block comes. When you have the block, you have to fill the well by going and looking at something beautiful, like taking an artist's date.<br><br>
+
+                        An artist's date is where you go out and it's just for your inner artist. You look at stuff and fill the well so you have new information to empty out. Take a walk, go see art, go see dance. <br> <br>
+                        I had to realize that being an artist is being a human being, it's not being a machine. I can't just turn it on and off. I'll have a big show where I worked so hard, then you go back to the studio and you're not at this level anymore. You have to start again and then build back up to the next show. <br> <br>
+
+                        <div class="intro-image-container">
+                        <img src="images/FH2.jpg" alt="Frank's solo exhibition: Wish You Were Here"
+                            style="width: 700px; height: 300px; object-fit: cover;">
+                            <p class="image-caption"> Frank's solo exhibition: "Wish You Were Here" @ Swivel Gallery</p>
+                        </div>
+
+                        You have to throw something to break it. These problems are real, but it's not going to last forever. You're gonna grow into yourself as an artist and don't expect the artist inside of you to be a genius 24 hours a day, let them be funky and rebellious. Treat your artist carefully so that you can have the bravery to say “fuck it, I'm going to do this.” Take risks. That's how you make progress.
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom" id="downtown">THE DOWNTOWN 54</div>
+                    <div class="body-3">
+                        The late '70s and '80s was all about clubs and nightlife. <br><br>
+
+                       Stanley, this Polish guy said, "We have this place on St. Mark's Place”. It was in the basement of a Polish church. We went down there, painted it black, and opened <a href="https://www.nyclgbtsites.org/site/club-57/" target="_blank"> <u>Club 57</u></a>. We didn't even have a liquor license. We rented it out for $25 a night. <a href="https://www.haring.com/!/about-haring/bio" target="_blank"> <u>Keith</u></a> and I charged 25 cents to get in our show because we wanted to buy some pot. [Laughs] <br><br>
+
+                       <div class="intro-image-container">
+                        <img src="images/FH3.jpg" alt="Frank Holliday with Keith Haring and Qkuan Chi at Club 57"
+                            style="width: 500px; height: 400px; object-fit: cover;">
+                            <p class="image-caption">Frank Holliday with Keith Haring and Qkuan Chi at Club 57</p>
+                        </div>
+
+                        Do you know where <a href="https://www.instagram.com/irvingplaza/" target="_blank"> <u>Irving Plaza</u></a> is? We started that. I was the stage manager. We were working at Irving Plaza on weekends and Club 57 on weekdays. At one point, we took all the statues from the church downstairs and had our own revival. The art world would not let us in, so we said, "Fuck you, we'll just do it ourselves." We named it Club 57 as a joke. <a href="https://www.roundabouttheatre.org/theatres-and-venues/studio-54" target="_blank"> <u>Studio 54</u></a> was the glamorous club. We made a joke that Club 57 was the downtown version of Studio 54. <br><br>
+
+                        Every night was a different thing. The guys that did <a href="https://www.oscars.org/events/hairspray-1988-30th-anniversary" target="_blank"> <u>Hairspray</u></a> came out of Club 57. They were my friends and my musical director. <a href="https://www.instagram.com/madonna/" target="_blank"> <u>Madonna</u></a> was there. People did the <a href="https://barbie.fandom.com/wiki/Barbie_and_the_Rockers:_Out_of_this_World" target="_blank"><u>Barbie musical</u></a>, they did <a href="https://www.greekmythology.com/Plays/Euripides/Trojan_Women/trojan_women.html" target="_blank"><u>Trojan Women</u></a>. My boyfriend, Henry Post, put a listing in <a href="https://nymag.com/" target="_blank"> <u>New York Magazine</u></a> and exposed the club. All of a sudden it was popular. We had lines here on the block. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/FH4.jpg" alt="Youth against Death. 1980. Photograph by Katherine Dumas From left: Nancy Ulrich, Scott Covert, Frank Holliday, and Natalya Maystrenko"
+                            style="width: 700px; height: 400px; object-fit: cover;">
+                            <p class="image-caption">Youth against Death. 1980. Nancy Ulrich, Scott Covert, Frank Holliday, and Natalya Maystrenko. Photo by Katherine Dumas</p>
+                        </div>
+
+                        If I had known that you could get super famous, I would have done it. You can't count yourself out of being successful. You have to understand that somebody has to be successful so it might as well fucking be you. I didn't know that Madonna was gonna be Madonna. I thought she was just a bitch.
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="h4-custom" id="do">DO IT BECAUSE YOU HAVE TO</div>
+                    <div class="body-4">
+                        My education as an artist was brutal. For many, many years, I've had teachers that damaged me that I still keep with me. It's such a vulnerable, important phase that you have made a decision to pursue art. I honor it because it's hard. <br><br>
+
+                        Seeing young people coming to New York to study is brave. Our future depends on what you guys do. You guys are young, and people can say shit to you at your age that will fuck you up. I'm interested in who you are and what your vision is and how your generation is seeing things differently than my generation. It's very important for me to nurture you guys. In my class, I don't want to put all these rules where you can't even express yourself and you're afraid to do anything. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/FH5.jpg" alt="Frank moving to New York"
+                            style="width: 400px; height: 400px; object-fit: cover;">
+                            <p class="image-caption">Frank moving to New York</p>
+                        </div>
+
+                        50 years of painting, I know what happens with young artists, and I know how they can be damaged. I don't like that. I don't like that at all. You guys are fucking precious. You're so important. I think we should be loving you guys and encouraging and depending on you and trusting you and letting you grow and getting you to trust the process because there’s shitty days. That pencil will not sharpen some days. <br><br>
+
+                        Learn how to validate yourself. You're not working towards having value. You already have value before you even start. When you make money, everybody will love you. But until you do, they're gonna say “you're wrong.” It’s important to say “fuck you” to all those people and do it because you have to.
+                    </div>
+
+
+                    <!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>2</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> FRANK HOLLIDAY<br>
+                    <strong>DATE:</strong> DEC 05, 2025
+                    <br><br>
+                    Frank was my Time professor for my Fall 2025 semester at Parsons. He's undoubtedly the best prof I've had yet. <br><br>
+                    Every class he shares a new crazy event he had back at Club 57 or drops a new piece of artists lore. Like when he got run
+                    over by a car. <br><br>
+                    The way he encourages us while simultaneously pushing ourselves to do better has been so refreshing and assuring. Truly a kind soul.
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>FH120525</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+               
+                     <!-- Social Section -->
+                    <div class="profile-divider"></div>
+
+                    <div class="social-section">
+                        <div class="h1-custom" style="margin-top: 0;">MORE OF FRANK HERE!</div>
+                        <div class="social-icons-row">
+                            
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/frank.holliday/" target="_blank" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+
+                            <!-- Website -->
+                            <a href="https://www.flickr.com/photos/fholliday/" target="_blank" class="social-link">
+                                <i class="fas fa-globe"></i>
+                                <span>Website</span>
+                            </a>
+                        </div>
+                    </div>
+            </main>
+        </div>
+    </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+   <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+    
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div> </section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+        <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

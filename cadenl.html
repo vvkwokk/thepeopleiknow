@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Caden Li - The People I Know</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 1100px; 
+            right: 2%; 
+            transform: rotate(8deg); 
+        }
+
+        #sticker2 { 
+            top: 2200px; 
+            left: 2%; 
+            transform: rotate(-6deg); 
+        }
+
+        #sticker3 { 
+            top: 3360px; 
+            right: 3%; 
+            transform: rotate(4deg); 
+        }
+
+        #sticker4 { 
+            top: 5000px; 
+            left: 5%; 
+            transform: rotate(-10deg); 
+        }
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/CLnote1.jpg" alt="Sticker 1">
+                <p class="sticker-caption">Caden and Eddy @ TeenHacks</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/CLnote2.jpg" alt="Sticker 2">
+                <p class="sticker-caption">Caden and Eddy @ Columbia</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/CLnote3.jpg" alt="Sticker 3">
+                <p class="sticker-caption">Caden as an AI Intern @ Notion</p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/CLnote4.jpg" alt="Sticker 4">
+                <p class="sticker-caption">Caden and Scioly team</p>
+            </div>
+
+            <main class="profile-main">
+
+                <!-- Profile Name -->
+                <h1 class="profile-name">Caden Li</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">Founder of Uberk Eats</span>
+                    <span class="tag-pill">Middle School Classmate</span>
+                    <span class="tag-pill">Tech</span>
+                </div>
+
+                <!-- Meta Row -->
+                <div class="meta-row">
+                    <span class="meta-date">DEC 24, 2025 10:32 AM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/CadenlIntro.jpg" alt="Caden Li Founder of Uberk Eats" style="width: 400px; height: 500px; object-fit: cover;">
+                    </div>
+
+                    <!-- Bio Text -->
+                    <p class="profile-bio">
+                        Hi, my name is Caden. I'm a freshman studying Computer Science at UC Berkeley. I'm interested in exploring entrepreneurship tech stuff, but I think it's kind of early to determine what I'm gonna do. 
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom" id="gambit">GAMBIT FOR GROWTH</div>
+                    <div class="body-1">
+                        I grew up in a very STEM-oriented environment. The entirety of high school was to do things to get into college. But what do you do after you get into college? It's a difficult question.
+                        <br><br>
+
+                        So <a href="https://x.com/eddybuild" target="_blank"> <u>Eddy</u></a> and I tried doing these projects to see what sticks, what doesn't, post it online, and see how people react to it. We started doing that in January and through the next couple of months we were through our first project: AI Chess glasses.
+                        <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/CL1.jpg" alt="Caden and Eddy @ Teenhacks Hackathon working on AI chess glasses" style="width: 630px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Caden and Eddy @ Teenhacks Hackathon working on AI chess glasses</p>
+                        </div>
+
+                        <a href="https://www.youtube.com/watch?v=DzSNskpoqIk" target="_blank"> <u>Alexandra Botez</u></a> tried our chess glasses. She was in Germany then, so we had to wake up at  4 AM to help her set it up on zoom after sleeping at 12 AM. [Laughs] Talking to her gave me reassurance that I’m going in the right direction. <br><br>
+
+                        In those 3 months we got really lucky. That virality online gave me a lot of opportunities to connect with different people that I look up to. It was the first time where college apps wasn't influencing my decisions. You feel liberated to do something that nobody else forced you to do.
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom" id="notion">THE J.A.R.V.I.S. OF NOTION</div>
+                    <div class="body-2">
+                        Earlier that year, I was fortunate to get an internship at a company called <a href="https://www.notion.com/" target="_blank"> <u>Notion</u></a> because the CEO of Notion saw one of my projects. I lived in San Francisco by myself - my landlord was someone at Notion [Laughs]. <br><br>
+
+                        For the first two weeks, I couldn't find any housing, so I lived at <a href="https://cluely.com/" target="_blank"> <u>Cluely</u></a>. I knew <a href="https://www.instagram.com/im_roy_lee/" target="_blank"> <u>Roy</u></a>  from this Columbia hackathon, which Eddy and I actually won. He invited us to his own hackathon upstate, and we got closer to him. The people at Cluely are pretty young so you could say slang and brain rot references and they'd get it, which was something I realized was not the case at Notion - the age range is slightly larger [Laughs].
+                        <br><br>
+
+                        When people think of an AI, you'd think you'd want a <a href="https://marvelcinematicuniverse.fandom.com/wiki/J.A.R.V.I.S." target="_blank"> <u>J.A.R.V.I.S.</u></a>, right? It's something that people want to reach for. When you talk to ChatGPT, you send a message and wait a couple seconds. It's like a Google search that's tailored towards you. But you actually want AI to change its shape based on the current task. <br><br>
+
+                        There's this thing called <a href="https://cursor.com/" target="_blank"> <u>Cursor</u></a> at Notion where you can ask the AI to code something for you. 
+Cursor is so special because it has context to your code. Like J.A.R.V.I.S., it knew everything about Iron Man's life. That's the same for Cursor where it knows your entire code base. It can give code changes that are tailored to you.
+<br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/CL2.jpg" alt="Caden and Notion Interns" style="width: 700px; height: 500px; object-fit: cover;">
+                        <p class="image-caption">Caden and Notion Interns</p>
+                        </div>
+
+                        I think the tech community in general and me as well is very pro-development of AI. I'm not as concerned as AI taking over the world as I am about it replacing your own learning experience. <br><br>
+                        
+                        If you do vibe code it empowers people who don't know how to code, but the chances of learning how to code properly also decreases. It gets to the point where if you want to build something that's greater, you don't have the foundations to do that. While the path is already paved for you, it’s important to know the reason for why you're doing the things that you're doing.
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom" id="uberk">UBERK EATS</div>
+                    <div class="body-3">
+                        I got to Berkeley in August and I realized there's a lot of free time. When you don't have a direction or specific purpose, it's very easy for you to dilly dally with your time. I joined this startup club called <a href="https://www.callaunchpad.org/" target="_blank"> <u>Launchpad</u></a>, and by mid-October, I'm like "shit I don't have a startup."<br><br>
+
+                        Even if I don't know if it's the right direction, moving in some kind of direction gives you more information then not moving at all. I look around the parts of my life that are impacting me. I have the unlimited meal plan, which lets me get a meal every 30 minutes, but I only use it twice a day. There's this sophomore in my club that pays $17 to eat the same meal.<br><br>
+                        I realized there's this huge price difference in the Berkeley dining experience - a lot of the freshmen don't actually use all the meal swipes that we have. So we made <a href="https://uberkeats.com/" target="_blank"> <u>Uberk Eats</u></a>, a platform where freshmen can sell their meals to the upper classmen for a very cheap price.<br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/CL3.jpg" alt="Caden presenting Uberk Eats" style="width: 700px; height: 400px; object-fit: cover;">
+                        <p class="image-caption">Caden presenting Uberk Eats</p>
+                        </div>
+
+                        We’ve been open for 15 days so far and had 70 freshmen users and around 400 people who bought meals through Uberk Eats. It's funny because when all is said and done, we're almost at $0 profit. But we actually just got an email from the Director of Dining, so Uberk Eats won't be living much longer. [Laughs]
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="h4-custom" id="impact">IMPACT THE PEOPLE YOU CARE ABOUT</div>
+                    <div class="body-4">
+                        Something I regret in high school was not making sure my Science Olympiad club had a tighter community. <br><br>
+
+                        I cared a lot about that club. I think I didn't do enough to make sure that impact was a community-wise effect. There's a similar problem here at Berkeley, and at least in my club. Next year, I hope to have made my club a lot closer. I want to make sure everybody cares for each other a lot more so they're more passionate about the club identity. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/CL4.jpg" alt="Caden with Scioly Team @ GNSHS" style="width: 500px; height: 500px; object-fit: cover;">
+                        <p class="image-caption">Caden with Scioly Team @ GNSHS</p>
+                        </div>
+                        
+                        It's nice to dream of impacting all the people in the world, but at the very minimum you should at least try to impact the people that you care about.
+                    </div>
+
+<!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>4</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> CADEN LI<br>
+                    <strong>DATE:</strong> DEC 24, 2025
+                    <br><br>
+                    Caden and I were in the same middle school and we had a couple of shared classes as a member of Team Hero. <br><br>
+                    
+                    I've seen him go from talking about the techy state of the world
+                    in 7th grade to now building those said techy things. <br><br>
+                    
+                    It really does make me happy [and oddly sentimental] seeing my friends achieve their goals and chase their ambitions, especially those who I've known for a long time.
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>CL122425</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    
+                    <div class="social-section">
+                    <div class="h1-custom" style="margin-top: 0;">MORE OF CADEN HERE!</div>
+                    <div class="social-icons-row">
+                        <!-- Instagram -->
+            <a href="https://www.instagram.com/cadenli2014/" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+
+            <!-- Website -->
+            <a href="https://www.cadenli.com/" target="_blank" class="social-link">
+                <i class="fas fa-globe"></i>
+                <span>Website</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/cadenli/" target="_blank" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+            </a>
+
+            <!-- X -->
+            <a href="https://x.com/cadenbuild/highlights" target="_blank" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+                <span>X</span>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:cadenli2025@gmail.com" class="social-link">
+                <i class="far fa-envelope"></i>
+                <span>Email</span>
+            </a>
+            
+        </div>
+            </main>
+    </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+    <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div> </section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+       <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

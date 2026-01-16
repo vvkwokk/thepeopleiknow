@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Pris Pong - The People I Know</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 1200px; 
+            right: 5%; 
+            transform: rotate(8deg); 
+        }
+
+        #sticker2 { 
+            top: 1750px; 
+            left: 2%; 
+            transform: rotate(-6deg); 
+        }
+
+        #sticker3 { 
+            top: 2700px; 
+            right: 3%; 
+            transform: rotate(4deg); 
+        }
+
+        #sticker4 { 
+            top: 4000px; 
+            left: 5%; 
+            transform: rotate(-10deg); 
+        }
+
+        #sticker5 { 
+            top: 5600px; 
+            right: 4%; 
+            transform: rotate(5deg); 
+        }
+
+        #sticker6 { 
+            top: 6300px; 
+            left: 2%; 
+            transform: rotate(-8deg); 
+        }
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/PPnote1.jpg" alt="Sticker 1">
+                <p class="sticker-caption">Young Pris drawing</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/PPnote2.jpg" alt="Sticker 2">
+                <p class="sticker-caption">Original Moonzen illustration</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/PPnote3.jpg" alt="Sticker 3">
+                <p class="sticker-caption">Illustrated 茶餐廳 [cha chaan teng] @ HK History Museum</p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/PPnote4.jpg" alt="Sticker 4">
+                <p class="sticker-caption">Pris painting for Hell from Hell exhibition</p>
+            </div>
+
+             <div id="sticker5" class="draggable-sticker">
+                <img src="images/PPnote5.jpg" alt="Sticker 5">
+                <p class="sticker-caption">Origami flowers @ To: Beautiful Donor</p>
+            </div>
+
+            <div id="sticker6" class="draggable-sticker">
+                <img src="images/PPnote6.jpg" alt="Sticker 6">
+                <p class="sticker-caption">Art workshop led by Pris</p>
+            </div>
+
+            <main class="profile-main">
+
+                <!-- Profile Name -->
+                <h1 class="profile-name">Pris Pong</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">Freelance Illustrator</span>
+                    <span class="tag-pill">Visual Curator</span>
+                    <span class="tag-pill">Guest Artist @ MCHK</span>
+                    <span class="tag-pill">Illustration</span>
+                    <span class="tag-pill">Design</span>
+                </div>
+
+                <!-- Meta Row -->
+                <div class="meta-row">
+                    <span class="meta-date">NOV 2, 2025 10:04 PM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/PrispIntro.JPG" alt="Pris Pong Illustrator & Visual Curator" style="width: 400px; height: 500px; object-fit: cover;">
+                    </div>
+
+                    <!-- Bio Text -->
+                    <p class="profile-bio">
+                         Hi I'm Pris, and I'm an illustrator and visual curator. I'm an independent
+                        artist and I freelance for different projects with corporate companies, museums and schools.
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom" id="candy">I WANT TO OPEN A CANDY STORE</div>
+                    <div class="body-1">
+                        I was one of those typical kids who loved drawing. In high school, while
+                        everyone was
+                        thinking about studying finance or becoming doctors for secure career paths, my first ambition
+                        was opening a
+                        candy store. [Laughs] It’s very random. I drew drafts of the interior design, thought about how
+                        to market it,
+                        the packaging, and all that stuff made me really happy. All of a sudden, I thought, “What if I
+                        can make money
+                        with my drawings?” It would be cool for drawing to be both my passion and what I earn for a
+                        living.
+                        <br><br>
+
+                        When I was young, I hoped to have a career like this. It’s not easy to pursue this path, but the
+                        people along
+                        the way gave me confidence to keep going, even if it’s a small step.
+                        <br><br>
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom" id="freelance">BECOMING (FREE)LANCE</div>
+                    <div class="body-2">
+                        Before freelancing, I was at an advertising agency. I was a designer at <a href="https://sourcing.hktdc.com/en/Supplier-Store-Directory/Bravos-Pictures-Ltd/1X0AILCX" target="_blank"> <u>Bravos</u></a> doing movie
+                        posters and video editing
+                        for trailers. At that time, the advertising culture was tense. I got off work every
+                        morning at 3 or 4 AM.
+                        It was my first job after graduation and I didn't see my parents for a long time. I didn't even have
+                        a meal with them for
+                        a few months. After 4 months of this schedule, I quit. <br><br>
+
+                        The Moonzen Brewery project back in 2018 was a turning point. Back then I didn’t have a job, I
+                        stayed home the whole
+                        year. I was drawing every day: I wake up, I draw and draw and eat and sleep and draw. I drew one
+                        piece about Moonzen [門神], a door
+                        guardian in
+                        Chinese culture. A friend tagged this piece to <a href="https://www.instagram.com/moonzenbrewery/" target="_blank"> <u>Moonzen Brewery</u></a> on Instagram when I posted it,
+                        and that’s how I got
+                        my first official illustration freelance job. That’s when I realized, “Oh I can earn money with
+                        my own style of illustration.” <br><br>
+
+                         <div class="intro-image-container">
+                            <img src="images/PP1.jpg" alt="Pris' grandma and neighbour with Moonzen Brewery Risograph prints"
+                                style="width: 400px; height:500px; object-fit: cover;">
+                                <p class="image-caption">Pris' grandma and neighbour with Moonzen Brewery Risograph prints</p>
+                        </div>
+
+                        Another project I got to work on was for Hong Kong Museum of History’s 2-year temporary
+                        exhibition titled <a href="https://hk.history.museum/tc/web/mh/exhibition/2021_past_01.html" target="_blank"> <u>‘Recreating a Classic:
+                        The Best Features of the Hong Kong Story'</u></a>. I was responsible for the illustrations; the curating
+                        was already decided by the museum.
+                        I researched old places in Hong Kong, visited a lot of 茶餐廳 [cha chaan teng], and looked at
+                        historical weapons. We used a
+                        black and white stroke style because the space is small, so we
+                        wanted to keep all the essence aligned in one theme of "Hong Kong's story." <br><br>
+
+                        It was difficult at the beginning because they didn't allow me to draw on the site. I had to
+                        create big drawings digitally, but
+                        it had to look like a painting on walls. Every day we did testing, especially on line art
+                        styles. It was like boom boom boom,
+                        4 months non-stop, day and night drawing. <br><br>
+
+                        <div class="intro-image-container">
+                            <img src="images/PP2.jpg" alt="Hong Kong History Museum Exhibition"
+                                style="width: 700px; height:400px; object-fit: cover;">
+                                <p class="image-caption">Hong Kong History Museum Exhibition. Design by Pris Pong</p>
+                        </div>
+
+                        Freelance takes discipline. It’s a contrast to what I am naturally because I'm random and
+                        spontaneous. But if you’re your own boss
+                        you can’t be like this, or else you have no money. [Laughs] When you’re freelancing, you’ve got
+                        to get yourself out there and meet people not only for jobs or careers, but to build authentic
+                        connections. What you build before
+                        starting your freelance journey connects everything after.
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom" id="craftsmanship">THE CRAFTSMANSHIP ARTIST</div>
+                    <div class="body-3">
+                        I never intentionally want to put my style in every work I do. But everything has me in bits of
+                        it - that’s what my clients and
+                        friends told me. There are 2 types of artists: one is bold and only wants their style; the other
+                        is
+                        more like a craftsmanship artist. <br><br>
+
+                        I think I'm the craftsmanship artist. I don't want everything to “taste” like me. I want my work
+                        tailor-made for each project.
+                        It’s one of my passions about art — not having one style that fits all, but generating different
+                        styles and creativity in different
+                        briefs. I'm not intentionally fitting my style in everything, but my vibes somehow are in the
+                        work.
+                        Sometimes it annoys me because I want to
+                        get rid of that, but it stays there. <br><br>
+
+                        I've become friends with one of my favorite local artists in Hong Kong, <a href="https://www.instagram.com/terencechoiyt/" target="_blank"> <u>Terence Choi</u></a>. He draws
+                        yokai and monstrous style works. We
+                        had a group exhibition together and he was exhibiting his mountain series. I was happy to meet
+                        him as a fan. Since then, we became
+                        friends and he invited me to another group show with <a href="https://www.instagram.com/ayip_gallery/" target="_blank"> <u>AYip</u></a>, and then we had the exhibition about
+                        Dante’s Inferno last year. <br><br>
+                        
+                        It was a
+                        huge career impact because I started to get to know more about the art world and how to make an
+                        independent exhibition. When we were
+                        planning how to curate and market the show, they gave me advice and introduced me to friends,
+                        which changed my path a lot. <br><br>
+
+                        <div class="intro-image-container">
+                            <img src="images/PP3.jpg" alt="Moonzen Brewery Risograph Print"
+                                style="width: 400px; height:400px; object-fit: cover;">
+                                <p class="image-caption">AYip, Terence, and Pris. Photo by Habi and Zev</p>
+                        </div>
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="h4-custom" id="listen">SHUT YOUR MIND AND LISTEN</div>
+                    <div class="body-4">
+                        When you have a lot of things in your mind, you want to express it in your own way — first shut your mind
+                        and listen. <br><br>
+
+                        Listen to what your clients, your exhibitors are trying to tell you. When you keep their words and ideas in mind rather than 
+                        trying to force your own, better things can come up. This year, my exhibition with the hospital authority organ
+                        donation was the first exhibition to show who
+                        the donor families are. <br><br>
+
+                        In the past, it wasn’t ethically appropriate to show who the donor families were. But <a href="https://www3.ha.org.hk/qeh/eng/main/index.htm" target="_blank"> <u>Queen
+                        Elizabeth's Hospital</u></a> changed this insight. They
+                        wanted people to know: What is their story? Why did their families want to
+                        give their organs to the people in need? I learned to
+                        let go of only following my curating vision and created an exhibition together with the donor families,
+                        volunteers, and the medical staff. <br><br>
+
+                        <div class="intro-image-container">
+                            <img src="images/PP5.jpg" alt="'To: Beautiful Donor' Exhibition"
+                                style="width: 700px; height:400px; object-fit: cover;">
+                                <p class="image-caption">'To: Beautiful Donor' Exhibition with donor familiies, volunteers, and medical staff</p>
+                        </div>
+
+                        It was inspiring. When you let go of the process and not hold onto what you want, but initiate the process with
+                        other participants, it makes things better than what one brain can think of. Maybe people who are
+                        experienced always have an ego on things. But along the way, you'll realize it's more of a
+                        barrier. <br><br>
+
+                        I love the project because the donor families made origami flowers together, and we’d stack them on
+                        the exhibition site. They wrote
+                        things in their mind, like their thoughts about their past, families and the thankfulness they have
+                        when they receive the donations. It connects the
+                        community. It's not only the exhibition, but the process that makes it beautiful. <br><br>
+
+                        One last piece of advice I have is pretty cliche, but I’d say you are ready. I always thought that I'm not good enough or I'm not
+                        ready yet. But you're never not ready. You're ready any
+                        time. So don’t hesitate and don’t doubt yourself. Do
+                        what you want. <br><br> Everything is ready for you at this moment.
+                    </div>
+
+                       <!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>3</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> PRIS PONG<br>
+                    <strong>DATE:</strong> NOV 2, 2025
+                    <br><br>
+                    Pris was a guest artist at my high school art class. I was going through an artist's block at that time so getting to know her and her journey assured me in the sense that choosing this path was the right one. <br><br>
+                    It was the first time I actually got to have 1-on-1 conversations with a real freelance artist - it really impacted me because she is quite literally achieving and living the life I've dreamt of. <br><br> She's so inspiring in many ways.  
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>PP110225</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    
+                    <div class="social-section">
+                    <div class="h1-custom" style="margin-top: 0;">MORE OF PRIS HERE!</div>
+                    <div class="social-icons-row">
+                        <!-- Instagram -->
+            <a href="https://www.instagram.com/pris_pong/" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+
+            <!-- Website -->
+            <a href="https://prispong.com/" target="_blank" class="social-link">
+                <i class="fas fa-globe"></i>
+                <span>Website</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/priscillapong/" target="_blank" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:pprispong@gmail.com" class="social-link">
+                <i class="far fa-envelope"></i>
+                <span>Email</span>
+            </a>
+        </div>
+            </main>
+    </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+    <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Hank -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-11-09">
+        <a href="hankq.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div> </section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+       <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

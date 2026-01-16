@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+
+    <title>Hank Qiu - The People I Know</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="internal-page">
+
+    <div class="hero-wrapper">
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span data-theme="🚪">🚪</span>
+                    <span data-theme="🍵">🍵</span>
+                    <span data-theme="💡">💡</span>
+                    <span data-theme="🌷">🌷</span>
+                    <span data-theme="🦐">🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="scroll-tracker-track">
+    <div class="scroll-tracker-bar" id="readingBar"></div>
+</div>
+
+<style>
+        #sticker1 { 
+            top: 1300px; 
+            right: 5%; 
+            transform: rotate(8deg); 
+        }
+
+        #sticker2 { 
+            top: 2000px; 
+            left: 2%; 
+            transform: rotate(-6deg); 
+        }
+
+        #sticker3 { 
+            top: 4100px; 
+            right: 3%; 
+            transform: rotate(4deg); 
+        }
+
+        #sticker4 { 
+            top: 5300px; 
+            left: 5%; 
+            transform: rotate(-10deg); 
+        }
+</style>
+
+        <div class="profile-container">
+            
+            <div id="sticker1" class="draggable-sticker">
+                <img src="images/HQnote1.jpg" alt="Sticker 1">
+                <p class="sticker-caption">Hank presenting about AI prompting</p>
+            </div>
+
+            <div id="sticker2" class="draggable-sticker">
+                <img src="images/HQnote2.jpg" alt="Sticker 2">
+                <p class="sticker-caption">Digital avatar @ NNKosmos</p>
+            </div>
+
+            <div id="sticker3" class="draggable-sticker">
+                <img src="images/HQnote3.jpg" alt="Sticker 3">
+                <p class="sticker-caption">Hank's work for Charles River Economic Labs</p>
+            </div>
+
+            <div id="sticker4" class="draggable-sticker">
+                <img src="images/HQnote4.jpg" alt="Sticker 4">
+                <p class="sticker-caption">Unfortunately this was real</p>
+            </div>
+
+            <main class="profile-main">
+
+                <!-- Profile Name -->
+                <h1 class="profile-name">Hank Qiu</h1>
+
+                <!-- Tags Row -->
+                <div class="tags-row">
+                    <span class="tag-pill">R&D Assistant @ XinChangYuan</span>
+                    <span class="tag-pill">High School Classmate</span>
+                    <span class="tag-pill">Tech</span>
+                </div>
+
+                <!-- Meta Row -->
+                <div class="meta-row">
+                    <span class="meta-date">NOV 9, 2025 10:01 AM</span>
+
+                    <div class="meta-icons">
+                        <button id="shareBtn" class="icon-circle" aria-label="Share this page">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                                <polyline points="16 6 12 2 8 6" />
+                                <line x1="12" y1="2" x2="12" y2="15" />
+                            </svg>
+                        </button>
+
+                        <button id="copyBtn" class="icon-circle" aria-label="Copy Link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                            </svg>
+                            <span class="tooltip-text">Copied! :)</span>
+                        </button>
+                    </div>
+
+                    <div class="dotted-divider cards-divider"></div>
+
+                    <!-- Intro Image -->
+                    <div class="intro-image-container">
+                        <img src="images/HankqIntro.JPG" alt="Hank Qiu R&D Assistant Manager @ XinChangYuan" style="width: 600px; height: 400px; object-fit: cover;">
+                    </div>
+
+                    <!-- Bio Text -->
+                    <p class="profile-bio">
+                        My name is Hank and I'm currently a first year student at the University of 
+                        Chicago, intending to major in computer science and economics. I like these 
+                        areas because I'm generally a stem oriented person, therefore it's very 
+                        interesting to apply this to real life problem solving. Well, the honest answer 
+                        right now is I'm not even completely sure that I will be majoring in these. Although 
+                        that's the most likely one right now. Maybe in an alternate universe, I'll be studying art.
+                    </p>
+
+                    <!-- P1 -->
+                    <div class="h1-custom" id="thinking">THINKING IN SYSTEMS</div>
+                    <div class="body-1">
+                        In the summer of 10th grade, I was in the Xplorer Science Research Program, hosted by 
+                        <a href="https://www3.ha.org.hk/qeh/eng/main/index.htm" target="_blank"> <u>Tencent</u></a> in the CS group. That's when I realized: <br><br>
+
+                        1. I don't hate research and AI machine learning is more accessible than I thought — even to ordinary 
+                        high schoolers like me. <br><br>
+                        2. It’s interesting to fine-tune models and try new ways to use existing literature and methods to come 
+                        up with our own to beat the existing literature. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/HQ1.jpg" alt="Hank in Aspiring Xplorers Science Program @ Tencent" style="width: 700px; height: 420px; object-fit: cover;">
+                        <p class="image-caption">Hank in Aspiring Xplorers Science Program @ Tencent</p>
+                        </div>
+
+                        I interned at <a href="https://nnkosmos.com/" target="_blank"> <u>NNKosmos</u></a> for two summers. The first summer, I assisted the product manager and created 
+                        user experience maps and flowcharts for various products the company offered. The first product was 
+                        a big vertical display screen with a digital avatar that interacts and speaks to you. Another product 
+                        was a near real-time generation of digital humans for short videos and live streams — you would feed 
+                        in input for what you wanted the avatar to say, and it would generate speech and animation accordingly. 
+                        I mapped out how these products would be used by customers and how to improve them.<br><br>
+                        
+                        <div class="intro-image-container">
+                        <img src="images/HQ2.jpg" alt="Developing Animatable Gaussians @ NNKosmos" style="width: 700px; height: 350px; object-fit: cover;">
+                        <p class="image-caption">Developing Animatable Gaussians @ NNKosmos</p>
+                        </div>
+                        
+                        The second summer, I worked as an assistant to the R&D manager. It was much more technical since the 
+                        product was already mature. I did a voice cloning project where if I have your voice for 10 minutes, 
+                        I can use that as training data, post-train the model, and input any words to be spoken in your voice. 
+                        Theoretically, with just 10 minutes of high-quality audio, you can make someone say anything you want – 
+                        which is a major AI security and governance risk. [Laughs] <br><br>
+                        
+                        It sounds at least 80% real, and if you're not 
+                        familiar with someone’s voice, it’s hard to tell the difference. That’s why you should be careful about 
+                        giving your audio files to others. Once someone has enough pictures and videos of you, they can make any 
+                        video they want.
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="h2-custom" id="faced">TWO-FACED</div>
+                    <div class="body-2">
+                        This is one of the parts where it gets more questionable and debatable: whether AI is good or bad. <br><br>
+
+                        There's a lot of positive aspects that are brought by AI for our generation. Although AI reliance is a thing, 
+                        a minority of people are harmed by it. Proper governance or AI safety is necessary, but I think there's a 
+                        good share of users that are benefiting from it and you can see the productivity boost quite clearly with 
+                        how quickly new apps and new elements are being developed. <br><br>
+                        
+                        Even if they're vibe-coded, if it works as a prototype, 
+                        there must be some value right? If you can automate that process, why not? <br><br>
+
+                        At a minimal level, you need consent to carry an AI of anyone. With deepfaking, it's getting to the point where it's 
+                        hard to tell the difference – even for experts in the field. Some of the mainstream models, for example, <a href="https://gemini.google/overview/image-generation/" target="_blank"> <u>Google's Nano Banana</u></a> and Veo models have SynthID watermarking in every single piece of media that they generate. With this, 
+                        you’ll always know if it was completely, partially, or not created by AI. But you can also always run open source 
+                        models that don't have these watermarks. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/HQ3.jpg" alt="Qiu, Hank. 2026. Watermarking scenario overview for Gen-AI" style="width: 700px; height: 300px; object-fit: cover;">
+                        <p class="image-caption">Qiu, Hank. 2026. Watermarking scenario overview for Gen-AI</p>
+                        </div>
+
+                        It's hard to control. For people who are so easily misled by fake news, this would just be a nightmare situation [Laughs].
+                        Our society rewards us without thinking about the consequences.<br><br>
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="h3-custom" id="tech">TECH FOR ALL</div>
+                    <div class="body-3">
+                        I've always been fascinated by the idea of a digital twin simulation for economics. I think there’s potential to use AI to 
+                        simulate various real-world agents, have them interact, and then draw economic conclusions from those simulations. Especially 
+                        for macroeconomics, it could be a good way to come up with new theories and quickly test hypotheses. <br><br>
+
+                        One of the projects I'm working on right now is for the Economic Policy Institute at the UChicago chapter of the <a href="https://www.charlesrivereconomicslabs.org/" target="_blank"> <u>Charles River Economic Labs</u></a>. We’re creating a simulation to model the impact of implementing paid family and medical leave in the US, especially 
+                        in the southern states, because the US is one of the only OECD countries without it [Laughs]. Some states have already implemented 
+                        it, but most still have not. <br><br>
+
+                        It’s important to improve accessibility of technology, especially for those with no internet or computer access. Distributing 
+                        technology more widely could make an impact on fighting poverty and spreading opportunity. In the Aspiring Xplorers Science Program at Tencent, 
+                        we did charity work using an AI model to detect hearing impairments. We went into the community, and people came to test whether 
+                        they had hearing issues or not. <br><br>
+
+                        <div class="intro-image-container">
+                        <img src="images/HQ4.jpeg" alt="Aspiring Xplorers Science Program @ Tencent" style="width: 500px; height: 300px; object-fit: cover;">
+                        <p class="image-caption">Aspiring Xplorers Science Program @ Tencent</p>
+                        </div>
+
+                        There’s little awareness of hearing disability and limited access to this kind of technology, yet people need it. The earlier you find 
+                        out you have hearing impairments, the sooner you can get a hearing aid and improve your life. Sometimes you don’t even realize you need it. 
+                        The more people you give useful technology to, the more it can help a community. It makes a really big difference. <br><br>
+                    </div>
+
+                    <!-- Library Card -->
+<div class="library-flip-container">
+    <div class="library-flip-inner">
+        
+        <!-- FRONT: Image -->
+        <div class="library-card-face library-front">
+           <img src="images/7door.png" alt="Door 7" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+
+        <!-- BACK: Writing -->
+        <div class="library-card-face library-back">
+            
+            <!-- Left Column -->
+            <div class="lib-left-col">
+                <div>DOOR</div>
+                <div>7</div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lib-content">
+                <div class="lib-header">ARCHIVE</div>
+                
+                <div class="lib-subjects">
+                    <strong>SUBJECT:</strong> HANK QIU<br>
+                    <strong>DATE:</strong> NOV 9, 2025
+                    <br><br>
+                    I've known Hank since 9th grade, but mainly through a shared bond with an insufferable English teacher in 10th grade. <br><br>
+                    He's been universally known as the leading competitor of AI chatbots, which has been quite handy when figuring out how to do this whole website. <br><br>
+                    No seriously I don't think I would've been able to complete this website without asking Hank like 10 very Google-able questions a week.
+                </div>
+
+                <div class="lib-footer-row">
+                    <span>THE PEOPLE I KNOW</span>
+                    <span>HQ110925</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    
+                    <div class="social-section">
+                    <div class="h1-custom" style="margin-top: 0;">MORE OF HANK HERE!</div>
+                    <div class="social-icons-row">
+                        <!-- Email -->
+                        <a href="mailto:hankqiu@uchicago.edu" class="social-link">
+                            <i class="far fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                    </div>
+            </main>
+        </div>
+    </div>
+
+        <div class="explore-wrapper">
+            <div class="dotted-divider profile-divider"></div>
+            <h2 class="h1-custom">DON'T GO YET THERE'S MORE TO EXPLORE!</h2>
+        </div>
+    </div>
+
+    <!-- PEOPLE CARDS -->
+        <section class="people-section" id="peopleSection">
+            <div class="horizontal-track" id="peopleTrack">
+    <!-- Kaya -->
+    <div class="person-card-wrapper" data-tags="fashion tech" data-date="2025-11-02">
+        <a href="kayas.html" class="person-card-link">
+            <div class="person-card">
+            <img src="images/1door.png" alt="Door 1" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Frank -->
+    <div class="person-card-wrapper" data-tags="fine art" data-date="2025-12-05">
+        <a href="frankh.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/2door.png" alt="Door 2" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Pris -->
+    <div class="person-card-wrapper" data-tags="design illustration" data-date="2025-11-02">
+        <a href="prisp.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/3door.png" alt="Door 3" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Caden -->
+    <div class="person-card-wrapper" data-tags="tech" data-date="2025-12-24">
+        <a href="cadenl.html" class="person-card-link"> 
+            <div class="person-card">
+               <img src="images/4door.png" alt="Door 4" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+    <!-- Maria -->
+    <div class="person-card-wrapper" data-tags="fashion design" data-date="2025-11-26">
+        <a href="mariam.html" class="person-card-link">
+            <div class="person-card">
+               <img src="images/5door.png" alt="Door 5" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+     <!-- Preston -->
+    <div class="person-card-wrapper" data-tags="design architecture photography" data-date="2025-11-05">
+        <a href="prestonk.html" class="person-card-link">
+            <div class="person-card">
+                <img src="images/6door.png" alt="Door 6" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+            </div>
+        </a>
+    </div>
+
+<!-- Vianna -->
+<div class="person-card-wrapper locked" id="lockedCard" data-tags="design tech" data-date="2025-12-4">
+    <a href="viannak.html" class="person-card-link locked-link">
+        <div class="person-card" style="position: relative; overflow: hidden; height: 100%; width: 100%; display: flex;">
+            <img src="images/8door.png" alt="Door 8" style="width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1;">
+        </div>
+    </a>
+</div> </section>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span><span></span><span></span><span></span>
+    </button>
+
+    <footer class="site-footer">
+       <p>© Vianna Kwok</p>
+    </footer>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <div id="imageModal" class="modal">
+    <img class="modal-content" id="fullImage">
+    <div id="modalCaption"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

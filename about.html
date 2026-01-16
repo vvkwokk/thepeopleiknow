@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        (function() {
+        
+            document.documentElement.classList.add('preload');
+            const themes = {
+                "🚪": { bg: "#f1e9e0", text: "#753a0e", accent: "#f6cd7b", secondary: "#5A3111" },
+                "🍵": { bg: "#dbeacf", text: "#223b0d", accent: "#bcde9f", secondary: "#36551D" },
+                "💡": { bg: "#0d1222", text: "#fff2a8", accent: "#272644", secondary: "#FEF4D1" },
+                "🌷": { bg: "#ffe1eb", text: "#750e3a", accent: "#f3b7ca", secondary: "#9D3A4B" },
+                "🦐": { bg: "#c4e4e6", text: "#701d08", accent: "#f8a184", secondary: "#8B0000" }
+            };
+
+            const savedThemeEmoji = localStorage.getItem('selectedTheme') || "🚪";
+
+            if (themes[savedThemeEmoji]) {
+                const t = themes[savedThemeEmoji];
+                const root = document.documentElement;
+                
+                // Set CSS variables
+                root.style.setProperty('--bg-color', t.bg);
+                root.style.setProperty('--text-color', t.text);
+                root.style.setProperty('--accent-color', t.accent);
+                root.style.setProperty('--secondary-text-color', t.secondary);
+                
+                root.style.setProperty('--theme-bg', t.bg);
+                root.style.setProperty('--theme-text', t.text);
+                root.style.setProperty('--theme-accent', t.accent);
+                root.style.setProperty('--theme-secondary', t.secondary);
+            }
+
+            // 5. Re-enable transitions once page is ready
+            window.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    document.documentElement.classList.remove('preload');
+                }, 50);
+            });
+        })();
+    </script>
+    
+    <title>About - The People I Know</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- Fixed: Only one body tag with the class -->
+<body class="internal-page">
+    
+    <div class="hero-wrapper">
+        
+        <!-- Navigation Header -->
+        <header class="nav-bar">
+            <div class="nav-left">
+                <a href="about.html" class="pill-button" style="background:var(--text-color); color:var(--bg-color);">About</a>
+                <a href="connect.html" class="pill-button">Connect</a>
+            </div>
+
+            <div class="nav-center">
+                <a href="index.html" class="pill-button title-pill">The People I Know</a>
+            </div>
+
+            <div class="nav-right">
+                <div class="pill-button emoji-bar">
+                    <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-area about-layout">
+
+            <p class="about-body">
+                We often cross paths with people without realizing how much we can learn from them. <br> <br>
+                This project began from that realization: I'm surrounded by people who's work and ways of seeing the world is something I want to learn more about. <br> <br>
+                Within this site is an archive of dialogues with people in creative and tech fields whose work inspires me. <br> <br> 
+                By reading their voices, I hope you can also take away something - a new idea, a new way of seeing, or simply the reminder to keep being curious.<br><br><br><br><br><br><br>
+            </p>
+        </main>
+
+    </div>
+
+    <button class="mobile-menu-btn" id="mobileTrigger">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+     <!-- FOOTER -->
+        <footer class="site-footer">
+            <p>© Vianna Kwok</p>
+        </footer>
+
+    <!-- MOBILE OVERLAY MENU -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="overlay-content">
+            <a href="about.html" class="overlay-pill">About</a>
+            <a href="connect.html" class="overlay-pill">Connect</a>
+            <div class="overlay-pill emoji-pill">
+                <span>🚪</span><span>🍵</span><span>💡</span><span>🌷</span><span>🦐</span>
+            </div>
+        </div>
+        <div class="overlay-footer">The People I Know</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
