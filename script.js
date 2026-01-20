@@ -1,5 +1,5 @@
 /* =========================================
-   1. SHRIMP GAME ENGINE
+   1. SHRIMP GAME ENGINE (FIXED MOBILE)
    ========================================= */
 const ShrimpGame = {
     active: false, 
@@ -73,10 +73,15 @@ const ShrimpGame = {
             `;
             document.body.appendChild(m);
             this.startModal = m;
-            m.querySelector('button').onclick = () => {
+            
+            const startBtn = m.querySelector('button');
+            const startAction = (e) => {
+                e.preventDefault();
                 this.initAudio(); 
                 this.startGameplay();
             };
+            startBtn.onclick = startAction;
+            startBtn.ontouchstart = startAction;
         }
 
         if (!this.winModal) {
@@ -90,15 +95,18 @@ const ShrimpGame = {
             `;
             document.body.appendChild(m);
             this.winModal = m;
-            m.querySelector('button').onclick = () => {
+            
+            const winBtn = m.querySelector('button');
+            const winAction = (e) => {
+                e.preventDefault();
                 m.classList.remove('active');
                 this.stop(); 
-                // Mark game as won permanently
                 sessionStorage.setItem('shrimpGameWon', 'true');
-                // Give key
                 sessionStorage.setItem('hasGoldenKey', 'true');
                 activateKeyMode(); 
             };
+            winBtn.onclick = winAction;
+            winBtn.ontouchstart = winAction;
         }
 
         if (!this.loseModal) {
@@ -112,10 +120,15 @@ const ShrimpGame = {
             `;
             document.body.appendChild(m);
             this.loseModal = m;
-            m.querySelector('button').onclick = () => {
+            
+            const retryBtn = m.querySelector('button');
+            const retryAction = (e) => {
+                e.preventDefault();
                 m.classList.remove('active');
                 this.startGameplay(); 
             };
+            retryBtn.onclick = retryAction;
+            retryBtn.ontouchstart = retryAction;
         }
     },
 
@@ -157,10 +170,7 @@ const ShrimpGame = {
         this.whaleElement.style.display = 'block'; 
         document.body.style.cursor = 'none';
         
-        // --- MOUSE LISTENERS ---
         document.addEventListener('mousemove', this.handleMouseMove);
-        
-        // --- ADDED: TOUCH LISTENERS (Mobile) ---
         document.addEventListener('touchstart', this.handleTouch, { passive: false });
         document.addEventListener('touchmove', this.handleTouch, { passive: false });
         
@@ -182,7 +192,6 @@ const ShrimpGame = {
         this.shrimps.forEach(s => s.element && s.element.remove());
         this.shrimps = [];
         
-        // --- REMOVE LISTENERS ---
         document.removeEventListener('mousemove', this.handleMouseMove);
         document.removeEventListener('touchstart', this.handleTouch);
         document.removeEventListener('touchmove', this.handleTouch);
@@ -199,8 +208,14 @@ const ShrimpGame = {
         }
     },
 
-    // --- ADDED: TOUCH HANDLER ---
+    // --- FIXED TOUCH HANDLER ---
     handleTouch(e) {
+        // IMPORTANT: If we are touching a button, do NOT preventDefault
+        // This allows the "click" event to still fire for the UI
+        if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+            return; 
+        }
+
         if(e.cancelable) e.preventDefault(); 
         
         const touch = e.touches[0];
@@ -232,15 +247,6 @@ const ShrimpGame = {
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         }
         document.body.style.cursor = 'default';
-    },
-
-    handleMouseMove(e) {
-        ShrimpGame.mouse.x = e.clientX; 
-        ShrimpGame.mouse.y = e.clientY;
-        if (ShrimpGame.whaleElement) {
-            ShrimpGame.whaleElement.style.left = e.clientX + 'px';
-            ShrimpGame.whaleElement.style.top = e.clientY + 'px';
-        }
     },
 
     spawnShrimps() {
@@ -871,18 +877,14 @@ document.addEventListener("DOMContentLoaded", function() {
 window.addEventListener('scroll', function() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // 1. Get the actual content height
     const totalDocHeight = document.documentElement.scrollHeight;
     const viewportHeight = document.documentElement.clientHeight;
     
-    // 2. SET AN OFFSET (e.g., subtract 600px for a large footer)
     const footerHeight = 810; 
     const adjustedTotalHeight = totalDocHeight - footerHeight - viewportHeight;
-    
-    // 3. Calculate percentage (clamped between 0 and 100)
+
     let scrollPercentage = (scrollTop / adjustedTotalHeight) * 100;
     
-    // Ensure it doesn't exceed 100% or go below 0%
     scrollPercentage = Math.min(100, Math.max(0, scrollPercentage));
     
     document.getElementById('readingBar').style.width = scrollPercentage + '%';
