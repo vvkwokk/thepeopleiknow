@@ -665,55 +665,45 @@ button.icon-circle:hover svg rect {
     z-index: -1; pointer-events: none;
 }
 
-/* --- LIBRARY CARD --- */
-
+/* Vintage Library Card */
 .library-flip-container {
-    background: transparent; 
-    width: 350px; 
-    max-width: 90vw; 
-    
-    aspect-ratio: 350 / 500; 
-    height: auto; 
-    
-    margin: 60px auto 90px; 
-    perspective: 1000px; 
-    cursor: pointer;
-    
-    display: block;
-    position: relative;
+    background: transparent; width: 350px; height: 500px;
+    margin: 60px auto 90px; perspective: 1000px; cursor: pointer;
 }
-
 .library-flip-inner {
-    position: relative; 
-    width: 100%; 
-    height: 100%;
-    text-align: left; 
-    transform-style: preserve-3d;
+    position: relative; width: 100%; height: 100%;
+    text-align: left; transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.15, 0.55, 0.55, 1); 
 }
-
-@supports not (aspect-ratio: 350 / 500) {
-    .library-flip-container {
-        height: 500px;
-    }
-    @media (max-width: 400px) {
-        .library-flip-container {
-            height: 400px; 
-        }
-    }
-}
-
+.library-flip-container:hover .library-flip-inner { transform: rotateY(180deg); }
 .library-card-face {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    -webkit-backface-visibility: hidden; 
-    backface-visibility: hidden;
-    border-radius: 4px; 
-    box-shadow: 2px 3px 8px rgba(0,0,0,0.15); 
-    overflow: hidden;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    border-radius: 4px; box-shadow: 2px 3px 8px rgba(0,0,0,0.15); overflow: hidden;
+}
+.library-front { z-index: 2; transform: rotateY(0deg); background-size: cover; background-position: center; }
+.library-back {
+    transform: rotateY(180deg); background-color:#fff9f5; 
+    color: #502407; font-family: 'Cousine', monospace; 
+    display: flex; padding: 20px 15px; gap: 12px;
+}
+.lib-left-col {
+    width: 30px; flex-shrink: 0; font-weight: bold; font-size: 10px; 
+    padding-top: 4px; opacity: 0.8; border-right: 1px solid rgba(80, 36, 7, 0.15); 
+    display: flex; flex-direction: column; gap: 5px;
+}
+.lib-content { flex-grow: 1; display: flex; flex-direction: column; }
+.lib-header {
+    font-weight: bold; margin-bottom: 12px; font-size: 16px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    border-bottom: 2px dotted var(--text-color); padding-bottom: 5px;
+    display: inline-block;
+}
+.lib-subjects { font-size: 12px; line-height: 1.5; margin-bottom: 20px; overflow-y: auto; }
+.lib-footer-row {
+    display: flex; flex-direction: column; gap: 5px; font-size: 8px; 
+    opacity: 0.6; margin-top: auto; text-transform: uppercase;
+    border-top: 1px solid rgba(80, 36, 7, 0.15); padding-top: 8px;
 }
 
 /* =========================================
