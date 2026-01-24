@@ -66,7 +66,7 @@ svg path, svg line, svg polyline {
 }
 
 /* =========================================
-   3. NAVIGATION & SHARED UI ELEMENTS
+   3. NAVIGATION
    ========================================= */
 .nav-bar {
     display: flex;
@@ -92,7 +92,7 @@ svg path, svg line, svg polyline {
     display: flex; align-items: center; justify-content: center;
 }
 
-/* --- Shared Pill Style --- */
+/* --- Pill style --- */
 .pill-button, .hero-title, .title-pill, .filter-pill, .social-link, .overlay-pill {
     display: flex;
     justify-content: center;
@@ -110,7 +110,7 @@ svg path, svg line, svg polyline {
                 color var(--trans-dur) var(--smooth);
 }
 
-/* Font Variations for Pills */
+/* Font Variations */
 .pill-button, .hero-title, .title-pill, .overlay-pill {
     font-family: 'New Spirit', serif;
     font-size: 20px;
@@ -132,7 +132,7 @@ svg path, svg line, svg polyline {
     letter-spacing: -0.02em;
 }
 
-/* Shared Hover Effects */
+/* Hover */
 .pill-button:hover, .hero-title:hover, .title-pill:hover, 
 .filter-pill:hover, .social-link:hover, .overlay-pill:hover {
     transform: translateY(-4px) scale(1.05); 
@@ -147,7 +147,7 @@ svg path, svg line, svg polyline {
     color: var(--bg-color);
 }
 
-/* --- Emoji Bar (Desktop/Global) --- */
+/* --- Emoji Bar  --- */
 .emoji-bar { display: flex; gap: 14px; cursor: default; }
 .pill-button.emoji-bar:hover {
     transform: none; box-shadow: none;
@@ -190,7 +190,7 @@ svg path, svg line, svg polyline {
 }
 
 /* =========================================
-   4. LAYOUT SECTIONS
+   4. LAYOUT
    ========================================= */
 .hero-wrapper {
     position: relative;
@@ -240,7 +240,7 @@ svg path, svg line, svg polyline {
 }
 
 /* =========================================
-   5. FILTER & UI COMPONENTS
+   5. FILTER
    ========================================= */
 .filter-wrapper {
     width: 100%; padding: 0 clamp(12px, 5vw, 60px); 
@@ -341,7 +341,7 @@ svg path, svg line, svg polyline {
 }
 
 /* =========================================
-   6. PEOPLE ARCHIVE (SCROLL & GRID)
+   6. PEOPLE ARCHIVE
    ========================================= */
 .people-section {
     width: 100%; padding: 0 clamp(12px, 5vw, 60px) 60px;
@@ -396,7 +396,7 @@ svg path, svg line, svg polyline {
 .person-card-link .person-card { transform: none; } 
 
 /* =========================================
-   7. PROFILE & CONTENT STYLES
+   7. PROFILE
    ========================================= */
 .profile-container {
     display: flex; justify-content: center;
@@ -508,7 +508,6 @@ svg path, svg line, svg polyline {
     }
 }
 
-/* Action Icons */
 button.icon-circle {
     appearance: none; font-family: inherit;
     width: 36px; height: 36px;
@@ -566,7 +565,7 @@ button.icon-circle:hover svg rect {
 }
 
 /* =========================================
-   8. STICKERS, MODALS & GAMES
+   8. STICKERS
    ========================================= */
 .draggable-sticker {
     position: absolute; z-index: 20; cursor: grab; width: 230px; 
@@ -633,7 +632,7 @@ button.icon-circle:hover svg rect {
 @keyframes zoom { from {transform:scale(0.8); opacity: 0;} to {transform:scale(1); opacity: 1;} }
 @keyframes fadeCaption { to { opacity: 1; } }
 
-/* --- Game Modal (Dotted Border Mask) --- */
+/* --- Game Modal --- */
 .game-modal {
     position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -744,12 +743,6 @@ button.icon-circle:hover svg rect {
 .close-btn:active { transform: scale(0.9) rotate(90deg); }
 .close-btn svg path { stroke: var(--text-color); }
 
-
-
-/* =========================================
-   MOBILE OVERLAY & EMOJI FIX
-   ========================================= */
-
 .overlay-content {
     display: flex; 
     flex-direction: column; 
@@ -764,9 +757,8 @@ button.icon-circle:hover svg rect {
     font-size: 24px; 
 }
 
-/* FIX: Explicitly style the emoji bar inside the overlay */
 .overlay-content .emoji-bar {
-    display: flex !important; /* Force visibility */
+    display: flex !important; 
     justify-content: center;
     align-items: center;
     gap: 28px;
@@ -779,15 +771,13 @@ button.icon-circle:hover svg rect {
     pointer-events: auto;
 }
 
-/* Ensure the hover effect works on the pill container if needed */
 .overlay-content .emoji-bar:hover {
-    background-color: var(--accent-color); /* Keep accent color on hover */
+    background-color: var(--accent-color); 
     color: var(--text-color);
     box-shadow: none;
     transform: none;
 }
 
-/* Style the emojis inside */
 .overlay-content .emoji-bar span {
     font-size: 24px; 
     line-height: 1; 
@@ -804,7 +794,6 @@ button.icon-circle:hover svg rect {
     transform: scale(0.9); 
 }
 
-/* Match the profile page emoji-pill style just in case */
 .emoji-pill { 
     margin-top: 6px; 
     display: flex; 
@@ -831,7 +820,7 @@ button.icon-circle:hover svg rect {
 }
 
 /* =========================================
-   11. SHRIMP GAME ASSETS
+   11. SHRIMP GAME 
    ========================================= */
 .floating-shrimp {
     position: fixed; top: 0; left: 0; font-size: 40px; z-index: 9999;  
