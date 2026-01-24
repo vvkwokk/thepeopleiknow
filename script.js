@@ -1,5 +1,5 @@
 /* =========================================
-   1. SHRIMP GAME ENGINE (FIXED MOBILE)
+   1. SHRIMP GAME
    ========================================= */
 const ShrimpGame = {
     active: false, 
@@ -23,7 +23,7 @@ const ShrimpGame = {
     winModal: null,
     loseModal: null,
 
-    // --- AUDIO SYSTEM ---
+    // --- AUDIOOOO ---
     initAudio() {
         if (!this.audioContext) {
             this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -51,7 +51,7 @@ const ShrimpGame = {
         } catch(e) { console.error("Audio Error:", e); }
     },
 
-    // --- UI CREATION ---
+    // --- UI ---
     createUI() {
         if (!this.timerElement) {
             const t = document.createElement('div');
@@ -208,7 +208,7 @@ const ShrimpGame = {
         }
     },
 
-    // --- FIXED TOUCH HANDLER ---
+    // --- TOUCH FOR MOBILE ---
     handleTouch(e) {
         // IMPORTANT: If we are touching a button, do NOT preventDefault
         // This allows the "click" event to still fire for the UI
@@ -314,7 +314,7 @@ const ShrimpGame = {
 };
 
 /* =========================================
-   2. KEY & UNLOCK UI LOGIC
+   2. KEY UNLOCK
    ========================================= */
 let keyCursorElement = null;
 
@@ -358,7 +358,7 @@ function activateKeyMode() {
 }
 
 /* =========================================
-   3. GENERAL LOGIC 
+   3. THEMES & PROFILE PAGE
    ========================================= */
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -660,10 +660,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================
-       F. MASTER CLICK HANDLER (DOOR & HINTS)
+       F. DOOR
        ========================================= */
 
-    // 1. Create the Locked Hint Modal
+    // 1.  Hint
     const hintModal = document.createElement('div');
     hintModal.className = 'game-modal unique-hint-modal';
     hintModal.innerHTML = `
@@ -678,7 +678,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(hintModal);
     hintModal.querySelector('button').onclick = () => hintModal.classList.remove('active');
 
-    // 2. The Logic
     document.addEventListener('click', (e) => {
         const targetLink = e.target.closest('a[href*="viannak.html"]');
         
@@ -686,17 +685,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const hasKey = sessionStorage.getItem('hasGoldenKey') === 'true';
             const isPermanentlyUnlocked = sessionStorage.getItem('viannakUnlocked') === 'true';
 
-            // SCENARIO 1: Previously unlocked. Let them through.
+            // SCENARIO 1:
             if (isPermanentlyUnlocked) {
                 return; // Default behavior (navigate)
             }
 
-            // SCENARIO 2: Has Key. Unlock it.
+            // SCENARIO 2:
             if (hasKey) {
                 e.preventDefault(); 
                 const wrapper = targetLink.closest('.person-card-wrapper');
                 
-                // Visual Unlock
                 if(wrapper) {
                     wrapper.style.transition = '0.5s';
                     wrapper.style.opacity = '1';
@@ -708,7 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                // Poof Animation
+                // Poof
                 if (keyCursorElement) {
                     keyCursorElement.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
                     keyCursorElement.style.transform = 'translate(-50%, -50%) rotate(-45deg) scale(1.5)';
@@ -719,21 +717,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, 200);
                 }
 
-                // Remove Key & Set Permanent Unlock
                 sessionStorage.removeItem('hasGoldenKey'); 
                 sessionStorage.setItem('viannakUnlocked', 'true');
 
-                // Reset Cursor
                 setTimeout(() => {
                     document.body.classList.remove('has-key-cursor');
                     document.body.style.cursor = 'default';
                 }, 400);
-
-                // Navigate
+               
                 setTimeout(() => { window.location.href = 'viannak.html'; }, 800);
 
             } else {
-                // SCENARIO 3: Locked, no key.
+                // SCENARIO 3:.
                 e.preventDefault();
                 e.stopPropagation();
                 hintModal.classList.add('active');
@@ -741,10 +736,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Page Load - Check Visual State
+  
     const isUnlocked = sessionStorage.getItem('viannakUnlocked') === 'true';
     if (isUnlocked) {
-         // If unlocked, immediately show the card as open
+
          const allLockedLinks = document.querySelectorAll('a[href*="viannak.html"]');
          allLockedLinks.forEach(link => {
             const wrapper = link.closest('.person-card-wrapper');
@@ -767,7 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =========================================
-   STICKER DRAG & MODAL LOGIC (UPDATED)
+   STICKERS
    ========================================= */
 document.addEventListener("DOMContentLoaded", function() {
     
@@ -777,7 +772,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const modalCaption = document.getElementById("modalCaption"); // New Element
     const closeBtn = document.getElementById("closeModalBtn");
 
-    // Initialize drag for all stickers
     stickers.forEach(sticker => {
         dragElement(sticker);
     });
@@ -786,7 +780,6 @@ document.addEventListener("DOMContentLoaded", function() {
         let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         let startX = 0, startY = 0;
         
-        // Grab image source and caption text
         let img = elmnt.querySelector("img");
         let captionText = elmnt.querySelector(".sticker-caption") ? elmnt.querySelector(".sticker-caption").innerText : "";
 
@@ -796,7 +789,6 @@ document.addEventListener("DOMContentLoaded", function() {
             e = e || window.event;
             e.preventDefault(); 
             
-            // Record start positions for click detection
             startX = e.clientX;
             startY = e.clientY;
             pos3 = e.clientX;
@@ -835,7 +827,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // --- Modal Functionality ---
     function openModal(src, caption) {
         if(modal && modalImg) {
             modal.style.display = "flex"; 
@@ -850,7 +841,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Close Button
+    // Close
     if(closeBtn) {
         closeBtn.onclick = function() {
             modal.style.display = "none";
@@ -864,7 +855,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Mobile Menu Trigger 
+    // Mobile Menu
     const mobileBtn = document.getElementById('mobileTrigger');
     const overlay = document.getElementById('mobileOverlay');
     if(mobileBtn && overlay) {
